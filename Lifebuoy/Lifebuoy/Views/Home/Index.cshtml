@@ -1,0 +1,51 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <div class="row">
+        @*<div class="col-md-6">
+            <img class="img-rounded img-responsive" src="~/Content/images/mission_img2.jpg" />
+        </div>*@
+        <div class="col-md-12" >
+            <h1>Когда надо заплыть за буйки, наш спасательный круг - ваш лучший выбор.</h1>
+        </div>       
+    </div>
+</div> 
+
+<div class="row main-page-row">
+    <div class="col-md-4" >
+        <img class="img-responsive" src="~/Content/images/pencil_icon.png" />        
+    </div>
+    <div class="col-md-8" align="center">       
+        <h2>Наш платформа проста в использовании, как карандаш</h2>        
+    </div>
+</div>
+ 
+<div class="row main-page-row">
+    <div class="col-md-8" align="center">
+        <h2>Создайте уникальную страницу в нашем конструкторе</h2>
+    </div>
+    <div class="col-md-4">
+        <img class="img-responsive" src="~/Content/images/puzzle.png" />
+    </div>
+</div>   
+ 
+<div class="row main-page-row">
+    <div class="col-md-4">
+        <img class="img-responsive" src="~/Content/images/spends.png" />
+    </div>
+    <div class="col-md-8" align="center">
+        <h2>Создать и запустить свой сайт дорого? Арендуйте место в каталоге.</h2>
+    </div>
+    @*<div class="col-md-4" align="center">
+            <img class="img-responsive" src="~/Content/images/profit.png" />
+            <h2>Добавьте возможность заказать абонемент и повысьте свою прибыль.</h2>
+        </div>*@
+</div>
+
+<div class="row">
+    <div class="col-md-12 registr-btn">
+        @Html.ActionLink("Регистрация", "AccountType", "Account")     
+    </div>
+</div>

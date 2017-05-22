@@ -1,0 +1,48 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+    Layout = "~/Views/Shared/_CatalogLayout.cshtml";
+    int count = 0;
+}
+@*@model IEnumerable<Lifebuoy.Models.Offers>*@
+@model Lifebuoy.Models.OffersListView
+
+@if (Model.Offers.Count() == 0)
+{
+    <tr>
+        <td>
+            Нет совпадений. Попробуйте изменить запрос.
+        </td>
+    </tr>
+}
+
+@foreach (var item in Model.Offers)
+{
+    <div class="row">
+        <div class="col-md-6 ">
+                @Html.Raw("<img class='img-rounded catalog-img' src=\"data:image/jpeg;base64," + item.CatalogImg + "\" />")          
+        </div>
+        <div class="col-md-6">
+            <div class="catalog-row">
+                 <a class="catalog-link" href="@Url.Action("ShowOffer","Catalog", new { id = item.catalogID })">@item.CatalogName</a>
+                 <span class="catalog-category">@item.Category</span>
+            </div>
+            <div class="catalog-row">
+                <p class="catalog-info">Услугу предоставляет: @item.Provider</p>
+            </div>
+            <div class="catalog-row">
+                <p class="catalog-info">Адрес: @item.City, @item.Adress</p>              
+            </div>
+            <div class="catalog-row">
+                <p class="catalog-info">Рабочие часы: @item.WorkingHours</p>
+            </div>
+            <div class="catalog-row">
+                <p class="catalog-info">Контакты: @item.Contacts</p>
+            </div>
+            <div class="catalog-row"> 
+                <p class="catalog-info">@item.ShortDescription</p>
+            </div>
+        </div>
+    </div>
+}
+
+

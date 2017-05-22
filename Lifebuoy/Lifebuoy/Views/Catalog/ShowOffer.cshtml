@@ -1,0 +1,91 @@
+﻿@model Lifebuoy.Models.Offers
+
+
+<div class="container">
+    <div id="main_area">
+        <div class="row main-page-row">          
+            <div class="col-md-6" id="slider">
+                <div class="row">
+                        <div  id="carousel-bounding-box">
+                            <div class="carousel slide" id="myCarousel">
+                                <!-- Carousel items -->
+                                <div class="carousel-inner"> 
+                                    @{int count = 0; } 
+                                    @foreach (var q in ViewBag.Images)
+                                    {
+                                        if (count == 0) {
+                                            <div class="active item" data-slide-number="@count">
+                                                <div class="col-md-12 carousel-col">            
+                                                    @Html.Raw("<img class='offer-img' src=\"data:image/jpeg;base64," + q + "\" />")
+                                                </div>
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="item" data-slide-number="@count">
+                                                <div class="col-md-12 carousel-col">
+                                                    @Html.Raw("<img class='offer-img' src=\"data:image/jpeg;base64," + q + "\" />")
+                                                </div>
+                                            </div>
+                                        }
+                                        count++;
+                                    }
+                                    @*<div class="active item" data-slide-number="0">
+                                        <div class="col-md-12 carousel-col">
+                                            <img src="~/Content/images/jumbo_bckgrnd.jpg" class="offer-img">
+                                        </div>
+                                    </div>
+                                    <div class="item" data-slide-number="1">
+                                        <div class="col-md-12 carousel-col">
+                                            <img src="~/Content/images/mission_img2.jpg" class="offer-img">
+                                        </div>
+                                    </div>
+                                    <div class="item" data-slide-number="2">
+                                        <div class="col-md-12 carousel-col">
+                                            <img src="~/Content/images/profit.png" class="offer-img">
+                                        </div>
+                                    </div>*@ 
+                                                                      
+                                </div>
+                                <!-- Carousel nav -->
+                                <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+                                    <span class="glyphicon glyphicon-chevron-left"></span>
+                                </a>
+                                <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+                                    <span class="glyphicon glyphicon-chevron-right"></span>
+                                </a>
+                            </div>
+                        </div>
+                </div>
+            </div>
+            
+        @*</div>
+       *@
+            <div class="col-md-6">
+                <div class="catalog-row">
+                    <p class="catalog-info">Услугу предоставляет: @Model.Provider</p>
+                </div>
+                <div class="catalog-row">
+                    <p class="catalog-info">Адрес: @Model.City, @Model.Adress</p>
+                </div>
+                <div class="catalog-row">
+                    <p class="catalog-info">Рабочие часы: @Model.WorkingHours</p>
+                </div>
+                <div class="catalog-row">
+                    <p class="catalog-info">Контакты: @Model.Contacts</p>
+                </div>
+            </div>
+        </div>
+        <div class="row main-page-row">
+            <div class="col-md-12">
+                <p>
+                    @Model.Description
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+<div>
+    @Html.ActionLink("Назад", "Index")
+</div>
+<script src="~/Scripts/ImagesCaruselScripts.js" type="text/javascript"></script>
