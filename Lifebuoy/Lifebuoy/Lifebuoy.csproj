@@ -240,7 +240,9 @@
     <Content Include="Scripts\SidebarScripts.js" />
     <Content Include="Scripts\uploadImagesScripts.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -287,6 +289,7 @@
     <Content Include="Views\Account\RegisterProvider.cshtml" />
     <Content Include="Views\Admin\ModeratorPage.cshtml" />
     <Content Include="Views\Admin\ModerateOffer.cshtml" />
+    <Content Include="Views\Shared\AccessDenied.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

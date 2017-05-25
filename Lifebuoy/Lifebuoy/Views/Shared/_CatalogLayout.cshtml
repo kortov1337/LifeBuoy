@@ -35,18 +35,19 @@
     </div>
     <div class="catalog-container body-content">
         @*<div class="row">*@
-            <div class="col-md-2 ">
-                @Html.Partial("_CatalogSidebarPartial")
-            </div>
-            <div class="col-md-10 sidebar-divider">
-                @RenderBody()
-            </div>
+        <div class="col-md-2 ">
+            @Html.Partial("_CatalogSidebarPartial")
+        </div>
+        <div class="col-md-10 sidebar-divider">
+            @RenderBody()
+        </div>
         @*</div>*@
-        
-        <hr />
-        <footer id="footer">
-            <p>&copy; @DateTime.Now.Year - LifeBuoy</p>
-        </footer>
+        @*<div class="row">
+            <hr />
+            <footer id="footer">
+                <p>&copy; @DateTime.Now.Year - LifeBuoy</p>
+            </footer>
+        </div>*@
     </div>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")

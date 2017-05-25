@@ -22,67 +22,76 @@ namespace Lifebuoy.Controllers
        
         public ActionResult ModeratorPage()
         {
-            List<Offers> NonModered = new List<Offers>();
-            foreach( var q in db.Offers)
+            if (User.IsInRole("Moderator"))
             {
-                var item = db2.ModeratedOffers.FirstOrDefault(c => c.OfferId == q.Id);
-                if(item==null)
+                List<Offers> NonModered = new List<Offers>();
+                foreach( var q in db.Offers)
                 {
-                    NonModered.Add(q);
+                    var item = db2.ModeratedOffers.FirstOrDefault(c => c.OfferId == q.Id);
+                    if(item==null)
+                    {
+                        NonModered.Add(q);
+                    }
                 }
-
+                return View(NonModered);
             }
-            return View(NonModered);
+            else
+                return View("AccessDenied");
         }
 
         public ActionResult ModerateOffer(int? id)
         {
-            List<String> Images = new List<string>();
-            string[] splitResult;
-            if (id == null)
+            if (User.IsInRole("Moderator"))
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Offers offers = db.Offers.Find(id);
-            if (offers == null)
-            {
-                return HttpNotFound();
+                List<String> Images = new List<string>();
+                string[] splitResult;
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                Offers offers = db.Offers.Find(id);
+                if (offers == null)
+                {
+                    return HttpNotFound();
+                }
+                else
+                {
+                    splitResult = offers.Images.Split(';');
+                    Images = splitResult.ToList();
+                    Images.RemoveAt(Images.Count - 1);
+                }
+                ViewBag.Images = Images;       
+                return View(offers);
             }
             else
-            {
-                splitResult = offers.Images.Split(';');
-                Images = splitResult.ToList();
-                Images.RemoveAt(Images.Count - 1);
-            }
-            ViewBag.Images = Images;
-           
-            return View(offers);
+                return View("AccessDenied");
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult ModerateOffer(Offers offers)
         {
-            var item = db.Offers.FirstOrDefault(c => c.Id == offers.Id);
-            item.Id = offers.Id;
-            item.Adress = offers.Adress;
-            item.catalogID = offers.catalogID;
-            item.CatalogImg = offers.CatalogImg;
-            item.CatalogName = offers.CatalogName;
-            item.Category = offers.Category;
-            item.City = offers.City;
-            item.Contacts = offers.Contacts;
-            item.Description = offers.Description;
-            // item.Images = images;
-            item.Provider = offers.Provider;
-            item.Rating = offers.Rating;
-            item.ShortDescription = offers.ShortDescription;
-            item.WorkingHours = offers.WorkingHours;
-
-            db.ModeratedOffers.Add(new ModeratedOffers { OfferId = item.Id, isModerated = true });
-            db.SaveChanges();
-
-            return Redirect("ModeratorPage");
+            if (User.IsInRole("Moderator"))
+            {
+                var item = db.Offers.FirstOrDefault(c => c.Id == offers.Id);
+                item.Id = offers.Id;
+                item.Adress = offers.Adress;
+                item.catalogID = offers.catalogID;
+                item.CatalogName = offers.CatalogName;
+                item.Category = offers.Category;
+                item.City = offers.City;
+                item.Contacts = offers.Contacts;
+                item.Description = offers.Description;
+                item.Provider = offers.Provider;
+                item.Rating = offers.Rating;
+                item.ShortDescription = offers.ShortDescription;
+                item.WorkingHours = offers.WorkingHours;
+                db.ModeratedOffers.Add(new ModeratedOffers { OfferId = item.Id, isModerated = true });
+                db.SaveChanges();
+                return Redirect("ModeratorPage");
+            }
+            else
+                return View("AccessDenied");
         }
 
         protected override void Dispose(bool disposing)

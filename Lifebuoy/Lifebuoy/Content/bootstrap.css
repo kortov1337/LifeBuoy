@@ -148,7 +148,7 @@ summary {
 }
 
 .catalog-container{
-    padding-right: 15px;
+    /*padding-right: 15px;*/
     margin-right: auto;
     /*margin-left: 15px;*/
 }
@@ -180,6 +180,9 @@ summary {
     text-align:justify;
 }
 
+.catalog-info-hightlighted {
+    color: #000
+}
 .catalog-img {
     width:100%;
     height:auto;
@@ -215,9 +218,11 @@ summary {
 @media only screen and (max-width: 768px) and (min-width: 0) {
     .catalog-img {
                     height: auto; 
-                    width: calc(100vw - 58px); 
+                    width: calc(100vw - 20px); 
                     margin: 0 8px 0 -10px;
                 }
+
+
     }
 .sidebar-clear-icon {
     margin-left:5px;
@@ -430,6 +435,9 @@ html {
 
 body {
   /*margin: 0;*/
+   /*width: 100%;*/
+   margin-left:0px;
+   margin-top:50px;
    margin-bottom: 50px;
 }
 
@@ -4651,7 +4659,31 @@ textarea.input-group-sm > .input-group-btn > .btn {
   }
 }
 
+@media (min-width: 768px) and (max-width:768px) {
+  .navbar-nav {
+    float: left;
+    margin: 0;
+  }
+  .navbar-nav > li {
+    float: left;
+  }
+  .navbar-nav > li > a {
+    font-size: 0.8em;
+    padding-top: 15px;
+    padding-bottom: 15px;
+  }
+}
+
 @media (min-width: 768px) {
+  .navbar-left {
+    float: left !important;
+  }
+  .navbar-right {
+    float: right !important;
+  }
+}
+
+@media (min-width: 1024px) {
   .navbar-nav {
     float: left;
     margin: 0;
@@ -4665,12 +4697,17 @@ textarea.input-group-sm > .input-group-btn > .btn {
   }
 }
 
-@media (min-width: 768px) {
-  .navbar-left {
-    float: left !important;
+@media (min-width: 1440px) {
+  .navbar-nav {
+    float: left;
+    margin: 0;
   }
-  .navbar-right {
-    float: right !important;
+  .navbar-nav > li {
+    float: left;
+  }
+  .navbar-nav > li > a {
+    padding-top: 15px;
+    padding-bottom: 15px;
   }
 }
 

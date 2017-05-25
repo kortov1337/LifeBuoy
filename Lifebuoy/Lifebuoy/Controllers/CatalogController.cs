@@ -13,26 +13,6 @@ namespace Lifebuoy.Controllers
     {
         private OffersContext db = new OffersContext();
         private OffersContext db1 = new OffersContext();
-        // GET: Catalog
-        //public ActionResult Index()
-        //{           
-        //    var cities = db.Offers
-        //        .OrderBy(c => c.City)
-        //        .Select(c => c.City).Distinct();
-
-        //    var categories = db.Offers
-        //        .OrderBy(c => c.Category)
-        //        .Select(c => c.Category).Distinct();
-
-        //    var providers = db.Offers
-        //        .OrderBy(c => c.Provider)
-        //        .Select(c => c.Provider).Distinct();
-        //    ViewBag.Offers =  db.Offers.ToList();
-        //    ViewBag.Categories = categories;
-        //    ViewBag.Cities = cities;
-        //    ViewBag.Providers = providers;
-        //    return View(db.Offers.ToList());
-        //}
 
         public ActionResult Index(string categories, string providers, string cities)
         {

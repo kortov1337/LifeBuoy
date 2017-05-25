@@ -27,7 +27,10 @@
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Каталог", "Index", "Catalog")</li>
                     <li>@Html.ActionLink("Конструктор", "Dashboard", "Constructor")</li>
-                    <li>@Html.ActionLink("Панель модератора", "ModeratorPage", "Admin")</li>                  
+                    @if(Request.IsAuthenticated && User.IsInRole("Moderator"))
+                    {
+                    <li>@Html.ActionLink("Панель модератора", "ModeratorPage", "Admin")</li>   
+                    }               
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>

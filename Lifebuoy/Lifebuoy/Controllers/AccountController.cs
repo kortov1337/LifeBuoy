@@ -10,6 +10,8 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Lifebuoy.Models;
 using System.IO;
+
+
 namespace Lifebuoy.Controllers
 {
     [Authorize]
@@ -17,9 +19,11 @@ namespace Lifebuoy.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
-
+        
         public AccountController()
         {
+            
+            //IdentityRole
         }
 
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
@@ -85,6 +89,7 @@ namespace Lifebuoy.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
+                    //Session.Add("Role", UserManager.GetRoles(User.Identity.GetUserId()));
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
@@ -162,7 +167,11 @@ namespace Lifebuoy.Controllers
                 if (result.Succeeded)
                 {
                     await UserManager.AddToRoleAsync(user.Id, "RegularUser");
+                   
+                 
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
+                    //Session.Add("role",user.Roles);
+                   // var qq = Roles.GetRolesForUser(user.UserName).Contains("RegularUser");
                     //Session.Add("CurUserEmail", UserManager.GetEmail(user.Id));
 
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
