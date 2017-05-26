@@ -7,16 +7,19 @@ using Lifebuoy.DAL;
 using Lifebuoy.Models;
 using System.Net;
 
+
 namespace Lifebuoy.Controllers
 {
     public class AdminController : Controller
     {
         private OffersContext db = new OffersContext();
         private OffersContext db2 = new OffersContext();
+        private ApplicationDbContext adb = new ApplicationDbContext();
         // GET: Admin
-        public ActionResult Index()
+        public ActionResult AdministratorPage()
         {
-            return View();
+            //adb.Users
+            return View(adb.Users.ToList());
         }
 
        

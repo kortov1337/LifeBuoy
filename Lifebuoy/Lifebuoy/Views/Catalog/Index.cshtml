@@ -14,11 +14,11 @@
         </td>
     </tr>
 }
-
-@foreach (var item in Model.Offers)
+else { 
+foreach (var item in Model.Offers)
 {
-    <div class="row">
-        <div class="col-md-6 ">
+    <div class="row catalog-row-bg">
+        <div class="col-md-6">
                 @Html.Raw("<img class='img-rounded catalog-img' src=\"data:image/jpeg;base64," + item.CatalogImg + "\" />")          
         </div>
         <div class="col-md-6">
@@ -47,5 +47,5 @@
         </div>
     </div>
 }
-
+}
 

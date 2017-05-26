@@ -141,8 +141,8 @@ summary {
 }
 
 .sidebar-divider {
-    border-left: 1px solid grey;
-    background-color: white;
+    border-left: 1px solid rgba(128, 128, 128, 0.5);
+    /*background-color: white;*/
     padding-top: 10px;
     padding-bottom: 10px;
 }
@@ -193,6 +193,17 @@ summary {
     padding-top:5px;
 }
 
+#catalog_body {
+    background-color:white;
+}
+
+.catalog-row-bg {
+    background-color:white;
+    padding:10px 5px 10px 5px;
+    /*box-shadow:0 0 10px rgba(0,0,0,0.5);*/
+    margin: 0px -15px 0px -15px !important;
+    border-bottom: 1px solid rgba(128, 128, 128, 0.5);
+}
 .carousel-col {
     padding:0 !important;
 }
@@ -207,6 +218,21 @@ summary {
     padding:5px;
 }
 
+.error-bckgr {
+    color: #fff;    
+    background: url("images/error-code.jpeg");
+    background-size:cover;
+    min-height:100%;
+}
+
+.error-row {
+    min-height:550px;
+}
+
+.error-row > p > a {
+    color: #fff;
+    text-decoration:underline;
+}
 @media only screen and (max-width: 479px) and (min-width: 0) {
     .catalog-img {
                     height: auto; 

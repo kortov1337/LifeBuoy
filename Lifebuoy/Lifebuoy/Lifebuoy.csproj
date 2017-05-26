@@ -208,6 +208,7 @@
     <Content Include="Content\images\clear-icon.png" />
     <Content Include="Content\images\constructor-icon.png" />
     <Content Include="Content\images\constructor-icon2.png" />
+    <Content Include="Content\images\error-code.jpeg" />
     <Content Include="Content\images\jumbo_bckgrnd.jpg" />
     <Content Include="Content\images\logo.png" />
     <Content Include="Content\images\mission_img.jpg" />
@@ -290,6 +291,12 @@
     <Content Include="Views\Admin\ModeratorPage.cshtml" />
     <Content Include="Views\Admin\ModerateOffer.cshtml" />
     <Content Include="Views\Shared\AccessDenied.cshtml" />
+    <Content Include="Views\Admin\AdministratorPage.cshtml" />
+    <Content Include="Views\ApplicationUsers\Create.cshtml" />
+    <Content Include="Views\ApplicationUsers\Delete.cshtml" />
+    <Content Include="Views\ApplicationUsers\Details.cshtml" />
+    <Content Include="Views\ApplicationUsers\Edit.cshtml" />
+    <Content Include="Views\ApplicationUsers\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

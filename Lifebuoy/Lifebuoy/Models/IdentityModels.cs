@@ -29,5 +29,7 @@ namespace Lifebuoy.Models
         {
             return new ApplicationDbContext();
         }
+
+        //public System.Data.Entity.DbSet<Lifebuoy.Models.ApplicationUser> ApplicationUsers { get; set; }
     }
 }

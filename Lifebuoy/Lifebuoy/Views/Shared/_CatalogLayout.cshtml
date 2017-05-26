@@ -10,7 +10,7 @@
     @Scripts.Render("~/bundles/modernizr")
     <link href="https://fonts.googleapis.com/css?family=Scada" rel="stylesheet">
 </head>
-<body>
+<body id="catalog_body">
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
@@ -26,8 +26,14 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Каталог", "Index", "Catalog")</li>
-                    <li>@Html.ActionLink("Конструктор", "Dashboard", "Constructor")</li>
-                    <li>@Html.ActionLink("Панель модератора", "ModeratorPage", "Admin")</li> 
+                    @if (Request.IsAuthenticated && User.IsInRole("Provider"))
+                    {
+                        <li>@Html.ActionLink("Конструктор", "Dashboard", "Constructor")</li>
+                    }
+                    @if (Request.IsAuthenticated && User.IsInRole("Moderator"))
+                    {
+                        <li>@Html.ActionLink("Панель модератора", "ModeratorPage", "Admin")</li>
+                    }  
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
