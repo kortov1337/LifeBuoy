@@ -1,47 +1,51 @@
-﻿@model IEnumerable<Lifebuoy.Models.ApplicationUser>
+﻿@model PagedList.IPagedList<Lifebuoy.Models.ApplicationUser>
 @using Microsoft.AspNet.Identity
 @using Microsoft.AspNet.Identity.Owin;
+@using PagedList.Mvc;
 
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Admin panel";
 }
 
-<h2>Index</h2>
+<h2>Панель администратора</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
+<table class="table admin-table" id="users">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.UserName)
+            Имя пользователя
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Roles)
-        </th>  
+            Роль
+        </th>
         <th></th>
     </tr>
 
     @foreach (var item in Model)
     {
-        <tr>                    
-            <td>
-                @Html.DisplayFor(modelItem => item.UserName)
-            </td>
-            <th>
-               @{
-                   var userManager = Request.GetOwinContext().GetUserManager<ApplicationUserManager>();
-                   var userRoles = userManager.GetRoles(item.Roles.First().UserId);
-                <p>@userRoles[0]</p>
-            }
-            </th> 
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-            </td>
-        </tr>
-    }
+        <tbody>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserName)
+                </td>
+                <th>
+                    @{
+                        var userManager = Request.GetOwinContext().GetUserManager<ApplicationUserManager>();
+                        var userRoles = userManager.GetRoles(item.Roles.First().UserId);
+                        <p>@userRoles[0]</p>
+                    }
+                </th>
+                <td>
+                    @Html.ActionLink("Редактировать", "Edit", new { id = item.Id }) |
+                    @Html.ActionLink("Подробнее", "Details", new { id = item.Id }) |
+                    @Html.ActionLink("Удалить", "Delete", new { id = item.Id })
+                </td>
+            </tr>
+        </tbody>
+                        }
 
 </table>
+<br />
+    Страница @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) из @Model.PageCount
+    @Html.PagedListPager(Model, page => Url.Action("AdministratorPage", new { page }))

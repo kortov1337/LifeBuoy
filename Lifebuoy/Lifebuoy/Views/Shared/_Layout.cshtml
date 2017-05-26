@@ -34,7 +34,10 @@
                     {
                     <li>@Html.ActionLink("Панель модератора", "ModeratorPage", "Admin")</li>   
                     }  
-                    <li>@Html.ActionLink("Панель администратора", "AdministratorPage", "Admin")</li>             
+                    @if (Request.IsAuthenticated && User.IsInRole("Admin"))
+                    { 
+                    <li>@Html.ActionLink("Панель администратора", "AdministratorPage", "Admin")</li>   
+                    }          
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
@@ -43,9 +46,11 @@
     <div class="container body-content">
         @RenderBody()
         <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - LifeBuoy</p>
-        </footer>
+        <div>
+            <footer>
+                <p>&copy; @DateTime.Now.Year - LifeBuoy</p>
+            </footer>
+        </div>
     </div>
 
     @Scripts.Render("~/bundles/jquery")

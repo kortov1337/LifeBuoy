@@ -6,7 +6,8 @@ using System.Web.Mvc;
 using Lifebuoy.DAL;
 using Lifebuoy.Models;
 using System.Net;
-
+using PagedList.Mvc;
+using PagedList;
 
 namespace Lifebuoy.Controllers
 {
@@ -16,10 +17,17 @@ namespace Lifebuoy.Controllers
         private OffersContext db2 = new OffersContext();
         private ApplicationDbContext adb = new ApplicationDbContext();
         // GET: Admin
-        public ActionResult AdministratorPage()
+        public ActionResult AdministratorPage(int? page)
         {
-            //adb.Users
-            return View(adb.Users.ToList());
+            if (User.IsInRole("Admin"))
+            {
+                var users = adb.Users.ToList();
+                int pageSize = 5;
+                int pageNumber = (page ?? 1);
+                return View(users.ToPagedList(pageNumber, pageSize));
+            }
+            else
+                return View("AccessDenied");
         }
 
        

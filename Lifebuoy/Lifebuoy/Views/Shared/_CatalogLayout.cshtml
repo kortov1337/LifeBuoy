@@ -34,6 +34,10 @@
                     {
                         <li>@Html.ActionLink("Панель модератора", "ModeratorPage", "Admin")</li>
                     }  
+                    @if (Request.IsAuthenticated && User.IsInRole("Admin"))
+                    {
+                        <li>@Html.ActionLink("Панель администратора", "AdministratorPage", "Admin")</li>
+                    }  
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
