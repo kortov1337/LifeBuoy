@@ -21,31 +21,52 @@
         </th>
         <th></th>
     </tr>
-
-    @foreach (var item in Model)
-    {
-        <tbody>
+    <tbody>
+        @{int counter = 1; }
+        @foreach (var item in Model)
+        {
             <tr>
                 <td>
                     @Html.DisplayFor(modelItem => item.UserName)
                 </td>
                 <th>
-                    @{
+                    @{                       
                         var userManager = Request.GetOwinContext().GetUserManager<ApplicationUserManager>();
                         var userRoles = userManager.GetRoles(item.Roles.First().UserId);
-                        <p>@userRoles[0]</p>
+                        List<SelectListItem> listItems = new List<SelectListItem>();
+
+                        foreach (var role in ViewBag.Roles)
+                        {
+                            bool flag = false;
+
+                            if (userRoles[0].Equals(role.Name))
+                            {
+                                flag = true;
+                            }
+
+                            listItems.Add(new SelectListItem
+                            {
+                                Text = role.Name,
+                                Value = role.Name,
+                                Selected = flag
+
+                            });
+                        }
+                        @Html.DropDownList("roleSelect", listItems, htmlAttributes: new { @id = "role_selector", @class = "form-control minimal", @onchange = "onselectchange('"+ "#save_role" + @counter + "')" })
                     }
                 </th>
                 <td>
-                    @Html.ActionLink("Редактировать", "Edit", new { id = item.Id }) |
-                    @Html.ActionLink("Подробнее", "Details", new { id = item.Id }) |
-                    @Html.ActionLink("Удалить", "Delete", new { id = item.Id })
+                    @Html.ActionLink("Сохранить", "SaveRole", new { id = item.Id, roleName = userRoles[0] }, htmlAttributes: new { @id = "save_role" + @counter }) |
+                    @Html.ActionLink("Удалить", "DeleteUser", new { id = item.Id })
                 </td>
             </tr>
-        </tbody>
-                        }
+            counter++;
+        }
+    </tbody>
 
 </table>
 <br />
     Страница @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) из @Model.PageCount
     @Html.PagedListPager(Model, page => Url.Action("AdministratorPage", new { page }))
+
+<script type="text/javascript" src="~/Scripts/onselectscript.js"></script>

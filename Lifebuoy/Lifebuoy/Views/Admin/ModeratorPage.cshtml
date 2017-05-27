@@ -1,12 +1,15 @@
-﻿@model IEnumerable<Lifebuoy.Models.Offers>
-    <div class="row main-page-row">
-    <table class="table">
+﻿@model PagedList.IPagedList<Lifebuoy.Models.Offers>
+
+@using PagedList.Mvc;
+
+    @*<div class="row main-page-row">*@
+    <table class="table admin-table">
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Provider)
+               Провайдер
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Category)
+                Категория
             </th>
             <th></th>
         </tr>
@@ -34,4 +37,7 @@
         }
 
     </table>
-</div>
+        <br />
+        Страница @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) из @Model.PageCount
+        @Html.PagedListPager(Model, page => Url.Action("AdministratorPage", new { page }))
+@*</div>*@

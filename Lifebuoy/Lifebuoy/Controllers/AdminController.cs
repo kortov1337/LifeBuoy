@@ -8,6 +8,8 @@ using Lifebuoy.Models;
 using System.Net;
 using PagedList.Mvc;
 using PagedList;
+using Microsoft.AspNet.Identity.Owin;
+using System.Threading.Tasks;
 
 namespace Lifebuoy.Controllers
 {
@@ -21,7 +23,8 @@ namespace Lifebuoy.Controllers
         {
             if (User.IsInRole("Admin"))
             {
-                var users = adb.Users.ToList();
+                var users = adb.Users.ToList();               
+                ViewBag.Roles = adb.Roles.ToList();
                 int pageSize = 5;
                 int pageNumber = (page ?? 1);
                 return View(users.ToPagedList(pageNumber, pageSize));
@@ -30,11 +33,70 @@ namespace Lifebuoy.Controllers
                 return View("AccessDenied");
         }
 
-       
-        public ActionResult ModeratorPage()
+       public async Task<ActionResult> SaveRole(string id, string roleName)
+        {
+            if (User.IsInRole("Admin"))
+            {
+                var user = adb.Users.Find(id);          
+                var role = adb.Roles.Where(r => r.Name.Equals(roleName));
+                var rid = user.Roles.First().RoleId;
+                var oldRole = adb.Roles.Where(r => r.Id == rid);
+
+                var userManager = HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+                if (role!=null)
+                {
+                    var result = await userManager.RemoveFromRoleAsync(id, oldRole.First().Name);
+                    var result1 = await userManager.AddToRoleAsync(id, role.First().Name);
+                    adb.SaveChanges();
+                }
+                return RedirectToAction("AdministratorPage", "Admin");
+            }
+            else
+                return View("AccessDenied");
+        }
+
+        [HttpGet]
+        public ActionResult DeleteUser (string id)
+        {
+            if (User.IsInRole("Admin"))
+            {
+                var user = adb.Users.Find(id);
+                if(user!= null)
+                {
+                    return View(user);
+                }
+                else
+                    return HttpNotFound();
+            }
+            else
+                return View("AccessDenied");
+        }
+
+        [HttpPost, ActionName("DeleteUser")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(string id)
+        {
+            if (User.IsInRole("Admin"))
+            {
+                var user = adb.Users.Find(id);
+
+                if (user != null)
+                    adb.Users.Remove(user);
+                adb.SaveChanges();
+                return RedirectToAction("AdministratorPage");
+            }
+            else
+                return View("AccessDenied");
+        }
+
+        public ActionResult ModeratorPage(int? page)
         {
             if (User.IsInRole("Moderator"))
             {
+                int pageSize = 5;
+                int pageNumber = (page ?? 1);
+                
+
                 List<Offers> NonModered = new List<Offers>();
                 foreach( var q in db.Offers)
                 {
@@ -44,11 +106,11 @@ namespace Lifebuoy.Controllers
                         NonModered.Add(q);
                     }
                 }
-                return View(NonModered);
+                return View(NonModered.ToPagedList(pageNumber, pageSize));
             }
             else
                 return View("AccessDenied");
-        }
+        }       
 
         public ActionResult ModerateOffer(int? id)
         {

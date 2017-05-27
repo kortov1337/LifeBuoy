@@ -246,6 +246,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\onselectscript.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\SidebarScripts.js" />
@@ -302,11 +303,7 @@
     <Content Include="Views\Admin\ModerateOffer.cshtml" />
     <Content Include="Views\Shared\AccessDenied.cshtml" />
     <Content Include="Views\Admin\AdministratorPage.cshtml" />
-    <Content Include="Views\ApplicationUsers\Create.cshtml" />
-    <Content Include="Views\ApplicationUsers\Delete.cshtml" />
-    <Content Include="Views\ApplicationUsers\Details.cshtml" />
-    <Content Include="Views\ApplicationUsers\Edit.cshtml" />
-    <Content Include="Views\ApplicationUsers\Index.cshtml" />
+    <Content Include="Views\Admin\DeleteUser.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
