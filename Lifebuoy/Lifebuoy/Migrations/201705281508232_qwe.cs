@@ -3,17 +3,17 @@ namespace Lifebuoy.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class qww : DbMigration
+    public partial class qwe : DbMigration
     {
         public override void Up()
         {
             CreateTable(
-                "dbo.ProvidersOffers",
+                "dbo.ProvidersRequests",
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        Owner = c.String(),
-                        OfferId = c.String(),
+                        Email = c.String(),
+                        isConfirmed = c.Boolean(nullable: false),
                     })
                 .PrimaryKey(t => t.Id);
             
@@ -21,7 +21,7 @@ namespace Lifebuoy.Migrations
         
         public override void Down()
         {
-            DropTable("dbo.ProvidersOffers");
+            DropTable("dbo.ProvidersRequests");
         }
     }
 }

@@ -79,11 +79,56 @@ namespace Lifebuoy.Controllers
             if (User.IsInRole("Admin"))
             {
                 var user = adb.Users.Find(id);
-
                 if (user != null)
                     adb.Users.Remove(user);
                 adb.SaveChanges();
                 return RedirectToAction("AdministratorPage");
+            }
+            else
+                return View("AccessDenied");
+        }
+
+        public ActionResult DeleteOffer(int? id)
+        {
+            if (User.IsInRole("Moderator"))
+            {
+                List<String> Images = new List<string>();
+                string[] splitResult;
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                Offers offers = db.Offers.Find(id);
+                if (offers == null)
+                {
+                    return HttpNotFound();
+                }
+                else
+                {
+                    splitResult = offers.Images.Split(';');
+                    Images = splitResult.ToList();
+                    Images.RemoveAt(Images.Count - 1);
+                }
+                ViewBag.Images = Images;
+                return View(offers);
+            }
+            else
+                return View("AccessDenied");
+        }
+
+        [HttpPost, ActionName("DeleteOffer")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteOfferConfirmed(int? id)
+        {
+            if (User.IsInRole("Moderator"))
+            {
+                Offers offers = db.Offers.Find(id);
+                ModeratedOffers offer = db.ModeratedOffers.FirstOrDefault(o => o.OfferId == id);
+                if (offer != null)
+                    db.ModeratedOffers.Remove(offer);
+                db.Offers.Remove(offers);
+                db.SaveChanges();
+                return RedirectToAction("ModeratorPage");
             }
             else
                 return View("AccessDenied");
@@ -95,8 +140,8 @@ namespace Lifebuoy.Controllers
             {
                 int pageSize = 5;
                 int pageNumber = (page ?? 1);
-                
 
+                ViewBag.AllOffers = db.Offers.ToList();
                 List<Offers> NonModered = new List<Offers>();
                 foreach( var q in db.Offers)
                 {
@@ -159,6 +204,7 @@ namespace Lifebuoy.Controllers
                 item.Rating = offers.Rating;
                 item.ShortDescription = offers.ShortDescription;
                 item.WorkingHours = offers.WorkingHours;
+                item.isModerated = true;
                 db.ModeratedOffers.Add(new ModeratedOffers { OfferId = item.Id, isModerated = true });
                 db.SaveChanges();
                 return Redirect("ModeratorPage");

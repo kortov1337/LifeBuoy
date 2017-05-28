@@ -12,5 +12,6 @@ namespace Lifebuoy.DAL
         public DbSet<Offers> Offers { get; set; }
         public DbSet<ModeratedOffers> ModeratedOffers { get; set; }
         public DbSet<ProvidersOffers> ProviderOffers { get; set; }
+        public DbSet<ProvidersRequests> ProvidersRequests { get; set; }
     }
 }

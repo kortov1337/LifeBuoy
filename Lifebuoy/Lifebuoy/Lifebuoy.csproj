@@ -186,27 +186,19 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201705221149132_qwe.cs" />
-    <Compile Include="Migrations\201705221149132_qwe.Designer.cs">
-      <DependentUpon>201705221149132_qwe.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201705221213364_qww.cs" />
-    <Compile Include="Migrations\201705221213364_qww.Designer.cs">
-      <DependentUpon>201705221213364_qww.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201705221219529_qww1.cs" />
-    <Compile Include="Migrations\201705221219529_qww1.Designer.cs">
-      <DependentUpon>201705221219529_qww1.cs</DependentUpon>
+    <Compile Include="Migrations\201705281508232_qwe.cs" />
+    <Compile Include="Migrations\201705281508232_qwe.Designer.cs">
+      <DependentUpon>201705281508232_qwe.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
-    <Compile Include="Models\ModeratedOffers.cs" />
+    <Compile Include="Models\ProvidersRequests.cs" />
+    <Compile Include="Scripts\ModeratedOffers.cs" />
     <Compile Include="Models\Offers.cs" />
     <Compile Include="Models\OffersListView.cs" />
     <Compile Include="Models\ProvidersOffers.cs" />
-    <Compile Include="Models\UserListView.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -228,7 +220,9 @@
     <Content Include="Content\images\puzzle.png" />
     <Content Include="Content\images\regular_user.png" />
     <Content Include="Content\images\spends.png" />
+    <Content Include="Content\jquery-ui.css" />
     <Content Include="Content\PagedList.css" />
+    <Content Include="Content\starwars.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -247,9 +241,11 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\onselectscript.js" />
+    <Content Include="Scripts\ratingScripts.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\SidebarScripts.js" />
+    <Content Include="Scripts\starwars.js" />
     <Content Include="Scripts\uploadImagesScripts.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config">
@@ -304,9 +300,11 @@
     <Content Include="Views\Shared\AccessDenied.cshtml" />
     <Content Include="Views\Admin\AdministratorPage.cshtml" />
     <Content Include="Views\Admin\DeleteUser.cshtml" />
+    <Content Include="Views\Admin\DeleteOffer.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\fonts\" />
     <Folder Include="Content\images\test\" />
   </ItemGroup>
   <ItemGroup>
@@ -319,14 +317,8 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201705221149132_qwe.resx">
-      <DependentUpon>201705221149132_qwe.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201705221213364_qww.resx">
-      <DependentUpon>201705221213364_qww.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201705221219529_qww1.resx">
-      <DependentUpon>201705221219529_qww1.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201705281508232_qwe.resx">
+      <DependentUpon>201705281508232_qwe.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

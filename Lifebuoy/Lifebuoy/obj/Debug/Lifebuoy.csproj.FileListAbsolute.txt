@@ -67,11 +67,9 @@ d:\Диплом\Lifebuoy\Lifebuoy\bin\Microsoft.Owin.Security.MicrosoftAccount.x
 d:\Диплом\Lifebuoy\Lifebuoy\obj\Debug\Lifebuoy.csprojResolveAssemblyReference.cache
 d:\Диплом\Lifebuoy\Lifebuoy\obj\Debug\Lifebuoy.dll
 d:\Диплом\Lifebuoy\Lifebuoy\obj\Debug\Lifebuoy.pdb
-d:\Диплом\Lifebuoy\Lifebuoy\obj\Debug\Lifebuoy.Migrations.qwe.resources
-d:\Диплом\Lifebuoy\Lifebuoy\obj\Debug\Lifebuoy.csproj.GenerateResource.Cache
-d:\Диплом\Lifebuoy\Lifebuoy\obj\Debug\Lifebuoy.Migrations.qww.resources
-d:\Диплом\Lifebuoy\Lifebuoy\obj\Debug\Lifebuoy.Migrations.qww1.resources
 d:\Диплом\Lifebuoy\Lifebuoy\bin\PagedList.dll
 d:\Диплом\Lifebuoy\Lifebuoy\bin\PagedList.Mvc.dll
 d:\Диплом\Lifebuoy\Lifebuoy\bin\PagedList.xml
 d:\Диплом\Lifebuoy\Lifebuoy\bin\PagedList.Mvc.xml
+d:\Диплом\Lifebuoy\Lifebuoy\obj\Debug\Lifebuoy.Migrations.qwe.resources
+d:\Диплом\Lifebuoy\Lifebuoy\obj\Debug\Lifebuoy.csproj.GenerateResource.Cache

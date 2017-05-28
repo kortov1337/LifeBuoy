@@ -56,5 +56,7 @@ namespace Lifebuoy.Models
         [Display(Name = "Контакты")]
         [Required]
         public string Contacts { get; set; }
+        [Display(Name = "Статус")]
+        public bool isModerated { get; set; }
     }
 }

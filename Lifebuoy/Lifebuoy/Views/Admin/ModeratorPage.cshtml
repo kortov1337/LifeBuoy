@@ -1,43 +1,128 @@
 ﻿@model PagedList.IPagedList<Lifebuoy.Models.Offers>
 
 @using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+    
 
-    @*<div class="row main-page-row">*@
-    <table class="table admin-table">
-        <tr>
-            <th>
-               Провайдер
-            </th>
-            <th>
-                Категория
-            </th>
-            <th></th>
-        </tr>
-        @if (Model.Count() == 0)
+<div id="tabs">
+    <ul>
+        <li><a href="#tabs-1">Требует модерации</a></li>
+        <li><a href="#tabs-2">Все записи</a></li>
+        <li><a href="#tabs-3">Запросы на роль провайдера</a></li>
+    </ul>
+    <div id="tabs-1">
+        <table class="table admin-table">
+            <tr>
+                <th>
+                    Провайдер
+                </th>
+                <th>
+                    Категория
+                </th>
+                <th>
+                    Имя в каталоге
+                </th>
+                <th></th>
+            </tr>
+            @if (Model.Count() == 0)
             {
-            <tr>
-                <td>
-                    Нет предложений ждущих модерацию.
-                </td>
-            </tr>
-        }
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Provider)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Category)
-                </td>
-                <td>
-                    <a class="catalog-link" href="@Url.Action("ModerateOffer","Admin", new { id = item.Id })">Модерировать</a>
-                </td>
-            </tr>
-        }
+                <tr>
+                    <td>
+                        Нет предложений ждущих модерацию.
+                    </td>
+                </tr>
+            }
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Provider)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Category)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CatalogName)
+                    </td>
+                    <td>
+                        <a class="catalog-link" href="@Url.Action("ModerateOffer","Admin", new { id = item.Id })">Модерировать</a>
+                        @*<a class="catalog-link" href="@Url.Action("ModerateOffer","Admin", new { id = item.Id })">Удалить</a>*@
+                    </td>
+                </tr>
+            }
 
-    </table>
+        </table>
         <br />
         Страница @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) из @Model.PageCount
         @Html.PagedListPager(Model, page => Url.Action("AdministratorPage", new { page }))
-@*</div>*@
+    </div>
+    <div id="tabs-2">
+        <table class="table admin-table">
+            <tr>
+                <th>
+                    Провайдер
+                </th>
+                <th>
+                    Категория
+                </th>
+                <th>
+                    Имя в каталоге
+                </th>
+                <th>
+                    Статус
+                </th>
+                <th></th>
+            </tr>
+            @if (Model.Count() == 0)
+            {
+                <tr>
+                    <td>
+                        Нет предложений ждущих модерацию.
+                    </td>
+                </tr>
+            }
+            @foreach (Lifebuoy.Models.Offers item in ViewBag.AllOffers)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Provider)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Category)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CatalogName)
+                    </td>
+                    <td>
+                        @if (item.isModerated)
+                        {
+                            <p>Проверено</p>
+                        }
+                        else
+                        {
+                            <p>Ожидает проверки</p>
+                        }
+                    </td>
+                    <td>
+                        <a class="catalog-link" href="@Url.Action("ShowOffer","Catalog", new { id = item.catalogID })">Посмотреть</a>
+                        <a class="catalog-link" href="@Url.Action("DeleteOffer","Admin", new { id = item.Id })">Удалить</a>
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </div>
+    <div id="tabs-3">
+        <p>Mauris eleifend est et turpis. Duis id erat. Suspendisse potenti. Aliquam vulputate, pede vel vehicula accumsan, mi neque rutrum erat, eu congue orci lorem eget lorem. Vestibulum non ante. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Fusce sodales. Quisque eu urna vel enim commodo pellentesque. Praesent eu risus hendrerit ligula tempus pretium. Curabitur lorem enim, pretium nec, feugiat nec, luctus a, lacus.</p>
+        <p>Duis cursus. Maecenas ligula eros, blandit nec, pharetra at, semper at, magna. Nullam ac lacus. Nulla facilisi. Praesent viverra justo vitae neque. Praesent blandit adipiscing velit. Suspendisse potenti. Donec mattis, pede vel pharetra blandit, magna ligula faucibus eros, id euismod lacus dolor eget odio. Nam scelerisque. Donec non libero sed nulla mattis commodo. Ut sagittis. Donec nisi lectus, feugiat porttitor, tempor ac, tempor vitae, pede. Aenean vehicula velit eu tellus interdum rutrum. Maecenas commodo. Pellentesque nec elit. Fusce in lacus. Vivamus a libero vitae lectus hendrerit hendrerit.</p>
+    </div>
+</div>
+
+<link rel="stylesheet" href="~/Content/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script>
+
+    $( "#tabs" ).tabs();
+
+</script>

@@ -189,7 +189,7 @@ namespace Lifebuoy.Controllers
                     item.Rating = offers.Rating;
                     item.ShortDescription = offers.ShortDescription;
                     item.WorkingHours = offers.WorkingHours;
-
+                    item.isModerated = false;
                     var tmp = db.ModeratedOffers.FirstOrDefault(o => o.OfferId == item.Id);
                     if(tmp!=null)
                         db.ModeratedOffers.Remove(tmp);

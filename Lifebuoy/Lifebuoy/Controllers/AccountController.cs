@@ -10,7 +10,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Lifebuoy.Models;
 using System.IO;
-
+using Lifebuoy.DAL;
 
 namespace Lifebuoy.Controllers
 {
@@ -19,7 +19,8 @@ namespace Lifebuoy.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
-        
+        private OffersContext prdb = new OffersContext();
+
         public AccountController()
         {
             
@@ -166,26 +167,12 @@ namespace Lifebuoy.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    await UserManager.AddToRoleAsync(user.Id, "RegularUser");
-                   
-                 
+                    await UserManager.AddToRoleAsync(user.Id, "RegularUser");                                  
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    //Session.Add("role",user.Roles);
-                   // var qq = Roles.GetRolesForUser(user.UserName).Contains("RegularUser");
-                    //Session.Add("CurUserEmail", UserManager.GetEmail(user.Id));
-
-                    // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
-                    // Send an email with this link
-                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
-
                     return RedirectToAction("Index", "Home");
                 }
                 AddErrors(result);
             }
-
-            // If we got this far, something failed, redisplay form
             return View(model);
         }
 
@@ -196,7 +183,27 @@ namespace Lifebuoy.Controllers
             return View();
         }
 
-
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> RegisterProvider(RegisterViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var result = await UserManager.CreateAsync(user, model.Password);
+                if (result.Succeeded)
+                {
+                    await UserManager.AddToRoleAsync(user.Id, "RegularUser");
+                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                    prdb.ProvidersRequests.Add(new ProvidersRequests { Email = user.Email, isConfirmed = false });
+                    prdb.SaveChanges();
+                    return RedirectToAction("Index", "Home");
+                }
+                AddErrors(result);
+            }
+            return View(model);
+        }
         //
         // GET: /Account/ConfirmEmail
         [AllowAnonymous]

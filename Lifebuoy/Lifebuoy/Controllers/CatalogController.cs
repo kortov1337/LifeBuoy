@@ -64,7 +64,7 @@ namespace Lifebuoy.Controllers
             city.Insert(0, "Не выбрано");
             provider.Insert(0, "Не выбрано");
             category.Insert(0, "Не выбрано");
-
+            offers = offers.OrderByDescending(o => o.Rating);
             OffersListView olv = new OffersListView
             {
                 Offers = offers.ToList(),
@@ -79,7 +79,8 @@ namespace Lifebuoy.Controllers
 
             return View(olv);
         }
-        public ActionResult ShowOffer(string id)
+        //public ActionResult ShowOffer(string id)
+        public ActionResult ShowOffer(int? id)
         {
             List<String> Images = new List<string>();
             string[] splitResult;
@@ -88,8 +89,9 @@ namespace Lifebuoy.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-           // IQueryable<Offers> offer = db.Offers.Where(a => a.catalogID == id);
-            Offers offer = db.Offers.FirstOrDefault(a => a.catalogID == id);
+
+            //Offers offer = db.Offers.FirstOrDefault(a => a.catalogID == id);
+            Offers offer = db.Offers.Find(id);
             splitResult = offer.Images.Split(';');
             Images = splitResult.ToList();
             Images.RemoveAt(Images.Count - 1);
@@ -99,6 +101,27 @@ namespace Lifebuoy.Controllers
             }
             ViewBag.Images = Images;
             return View(offer);
+        }
+
+        [HttpPost]
+        public ActionResult SendRating(int? id, int rating)
+        {
+            var offer = db.Offers.Find(id);
+            if(offer!=null)
+            {
+                if(offer.Rating == 0)
+                {
+                    offer.Rating = rating;
+                }
+                else
+                    offer.Rating = Convert.ToInt32(Math.Ceiling(Convert.ToDouble((offer.Rating + rating) / 2)));
+                db.SaveChanges();
+                return Json(new { success = true, responseText = "Ваш голос учтён." }, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json(new { success = false, responseText = "Произошла ошибка." }, JsonRequestBehavior.AllowGet);
+            }
         }
     }
 }

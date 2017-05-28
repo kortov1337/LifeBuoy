@@ -12,7 +12,7 @@
     </div>
 </div>
 <div class="row dashboard-page-row">
-    <div class= "col-md-9 ">
+    <div class= "col-md-10 ">
         <table class="table">
             <tr>
                 <th>
@@ -23,6 +23,9 @@
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.City)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.isModerated)
                 </th>
                 <th></th>
             </tr>
@@ -41,22 +44,38 @@
                         @Html.Raw("<img class='dashboard-tumbnail' src=\"data:image/jpeg;base64," + item.CatalogImg + "\" />")                      
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Category)
+                        <p>
+                            @Html.DisplayFor(modelItem => item.Category)
+                        </p>
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.City)
+                        <p>
+                            @Html.DisplayFor(modelItem => item.City)
+                        </p>
                     </td>
                     <td>
-                        @Html.ActionLink("Редактировать", "Edit", new { id = item.Id }) |
-                        <a class="catalog-link" href="@Url.Action("ShowOffer","Catalog", new { id = item.catalogID })">Подробнее</a>|
-                        @Html.ActionLink("Удалить", "Delete", new { id = item.Id })
+                        @if(item.isModerated)
+                        {
+                            <p>Проверено</p>
+                        }
+                        else
+                        {
+                            <p>Ожидает проверки</p>
+                        }
+                    </td>
+                    <td>
+                        <p>
+                            @Html.ActionLink("Редактировать", "Edit", new { id = item.Id }) |
+                            <a class="catalog-link" href="@Url.Action("ShowOffer","Catalog", new { id = item.catalogID })">Подробнее</a>|
+                            @Html.ActionLink("Удалить", "Delete", new { id = item.Id })
+                        </p>
                     </td>
                 </tr>
             }
 
         </table>
     </div>
-    <div class="col-md-3 banner" align="right">
+    <div class="col-md-2 banner" align="center">
         <img src="~/Content/images/banner-const.jpg" class="img-responsive" />
     </div>
 </div>
