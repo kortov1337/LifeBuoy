@@ -183,6 +183,10 @@ summary {
 .catalog-info-hightlighted {
     color: #000
 }
+
+.catalog-info-votescount {
+    padding-top:0px !important;
+}
 .catalog-img {
     width:100%;
     height:auto;

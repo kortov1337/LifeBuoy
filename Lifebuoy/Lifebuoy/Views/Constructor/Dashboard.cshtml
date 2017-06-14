@@ -66,7 +66,7 @@
                     <td>
                         <p>
                             @Html.ActionLink("Редактировать", "Edit", new { id = item.Id }) |
-                            <a class="catalog-link" href="@Url.Action("ShowOffer","Catalog", new { id = item.catalogID })">Подробнее</a>|
+                            <a class="catalog-link" href="@Url.Action("ShowOffer","Catalog", new { id = item.Id })">Подробнее</a>|
                             @Html.ActionLink("Удалить", "Delete", new { id = item.Id })
                         </p>
                     </td>

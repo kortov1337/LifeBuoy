@@ -11,12 +11,17 @@ namespace Lifebuoy.Models
         public int Id { get; set; }
 
         public string Images { get; set; }
-        [Display(Name = "ID для каталога")]
-        public string catalogID { get; set; }
+
         public int Rating { get; set; }
+
+        public int VotesCount { get; set; }
+
+        [Display(Name = "ID для каталога")]
+        public string catalogID { get; set; }              
 
         [Display(Name = "Изображение в каталоге")]
         public string CatalogImg { get; set; }
+
         [Display(Name = "Категория")]
         [Required]
         public string Category { get; set; }
@@ -50,12 +55,13 @@ namespace Lifebuoy.Models
         public string WorkingHours { get; set; }
 
         [Display(Name = "Цены")]
-        [Required]
+        [Required]  
         public string Prices { get; set; }
 
         [Display(Name = "Контакты")]
         [Required]
         public string Contacts { get; set; }
+
         [Display(Name = "Статус")]
         public bool isModerated { get; set; }
     }

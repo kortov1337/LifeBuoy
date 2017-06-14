@@ -17,7 +17,6 @@ namespace Lifebuoy.Controllers
     {
         private OffersContext db = new OffersContext();
 
-        // GET: Constructor
         public ActionResult Dashboard()
         {
               if(User.IsInRole("Provider"))
@@ -46,7 +45,6 @@ namespace Lifebuoy.Controllers
                     return View("AccessDenied");
         }
 
-        // GET: Constructor/Details/5
         public ActionResult Details(int? id)
         {
             if (User.IsInRole("Provider"))
@@ -66,7 +64,6 @@ namespace Lifebuoy.Controllers
                 return View("AccessDenied");
         }
 
-        // GET: Constructor/Create
         public ActionResult Create()
         {
             if (User.IsInRole("Provider"))
@@ -77,7 +74,6 @@ namespace Lifebuoy.Controllers
                 return View("AccessDenied");
         }
 
-        // POST: Constructor/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(IEnumerable<HttpPostedFileBase> files, Offers offers)
@@ -115,7 +111,6 @@ namespace Lifebuoy.Controllers
                 return View("AccessDenied");
         }
 
-        // GET: Constructor/Edit/5
         public ActionResult Edit(int? id)
         {
             if (User.IsInRole("Provider"))
@@ -144,12 +139,8 @@ namespace Lifebuoy.Controllers
                 return View("AccessDenied");
         }
 
-        // POST: Constructor/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        //public ActionResult Edit([Bind(Include = "Id,ImgsPath,CatalogImg,Category,Provider,City,Description,Rating,WorkingHours,Contacts")] Offers offers)
         public ActionResult Edit(IEnumerable<HttpPostedFileBase> files, Offers offers)
         {
             if (User.IsInRole("Provider"))
@@ -203,7 +194,6 @@ namespace Lifebuoy.Controllers
                 return View("AccessDenied");
         }
 
-        // GET: Constructor/Delete/5
         public ActionResult Delete(int? id)
         {
             if (User.IsInRole("Provider"))
@@ -232,7 +222,6 @@ namespace Lifebuoy.Controllers
                 return View("AccessDenied");
         }
 
-        // POST: Constructor/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

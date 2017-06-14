@@ -28,8 +28,7 @@ else {
                         @Html.Raw("<img class='img-rounded catalog-img' src=\"data:image/jpeg;base64," + item.CatalogImg + "\" />")
                     </div>
                     <div class="col-md-6">
-                        <div class="catalog-row">
-                            @*<a class="catalog-link" href="@Url.Action("ShowOffer","Catalog", new { id = item.catalogID })">@item.CatalogName</a>*@
+                        <div class="catalog-row">                           
                             <a class="catalog-link" href="@Url.Action("ShowOffer","Catalog", new { id = item.Id })">@item.CatalogName</a>
                             <span class="catalog-category">@item.Category</span>
                         </div>
@@ -52,6 +51,8 @@ else {
                             <p class="catalog-info catalog-info-hightlighted">Стоимость: @item.Prices</p>
                         </div>
                         <div class="catalog-row" id=@rbarId></div>
+                        <div class="catalog-row">
+                            <p class="catalog-info catalog-info-hightlighted catalog-info-votescount" >Всего оценок: @item.VotesCount</p></div>
                         <div class="catalog-row">
                             <p class="catalog-info" id=@vId></p>
                         </div>                      

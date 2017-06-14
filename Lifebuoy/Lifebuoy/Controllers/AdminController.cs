@@ -10,6 +10,7 @@ using PagedList.Mvc;
 using PagedList;
 using Microsoft.AspNet.Identity.Owin;
 using System.Threading.Tasks;
+using System.Net.Mail;
 
 namespace Lifebuoy.Controllers
 {
@@ -18,7 +19,7 @@ namespace Lifebuoy.Controllers
         private OffersContext db = new OffersContext();
         private OffersContext db2 = new OffersContext();
         private ApplicationDbContext adb = new ApplicationDbContext();
-        // GET: Admin
+
         public ActionResult AdministratorPage(int? page)
         {
             if (User.IsInRole("Admin"))
@@ -33,7 +34,7 @@ namespace Lifebuoy.Controllers
                 return View("AccessDenied");
         }
 
-       public async Task<ActionResult> SaveRole(string id, string roleName)
+        public async Task<ActionResult> SaveRole(string id, string roleName)
         {
             if (User.IsInRole("Admin"))
             {
@@ -142,6 +143,10 @@ namespace Lifebuoy.Controllers
                 int pageNumber = (page ?? 1);
 
                 ViewBag.AllOffers = db.Offers.ToList();
+
+                if(db.ProvidersRequests.ToList().Count != 0)
+                    ViewBag.ProviderRequests = db.ProvidersRequests.ToList();
+
                 List<Offers> NonModered = new List<Offers>();
                 foreach( var q in db.Offers)
                 {
@@ -213,6 +218,77 @@ namespace Lifebuoy.Controllers
                 return View("AccessDenied");
         }
 
+
+        public async Task<ActionResult> ConfirmProvider(string email)
+        {
+            if (User.IsInRole("Moderator"))
+            {
+                var user = adb.Users.FirstOrDefault(u => u.Email == email);
+
+                if (user != null)
+                {
+                    var rid = user.Roles.First().RoleId;
+                    var oldRole = adb.Roles.Where(r => r.Id == rid);
+                    var userManager = HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+                    var result = await userManager.RemoveFromRoleAsync(user.Id, oldRole.First().Name);
+                    var result1 = await userManager.AddToRoleAsync(user.Id, "Provider");
+                    var request = db.ProvidersRequests.FirstOrDefault(pr => pr.Email == email);
+                    if(request!=null)
+                    {
+                        request.isConfirmed = true;
+                        db.ProvidersRequests.Remove(request);
+                        db.SaveChanges();
+                        //ViewBag.ConfirmResult = "Успешно подтверждено";
+                        //db.ProvidersRequests.Remove(request);
+                    }
+
+                    adb.SaveChanges();
+
+                }
+                   
+                return RedirectToAction("ModeratorPage", "Admin");
+            }
+            else
+                return View("AccessDenied");
+        }
+
+        public ActionResult DeleteRequest(int? id)
+        {
+            if (User.IsInRole("Moderator"))
+            {
+                var req = db.ProvidersRequests.Find(id);
+                if (req != null)
+                {
+                    db.ProvidersRequests.Remove(req);
+                    db.SaveChanges();
+                }
+
+                return RedirectToAction("ModeratorPage", "Admin");
+            }
+            else
+                return View("AccessDenied");
+        }
+        public ActionResult SendConfirmation (string email)
+        {
+            if (User.IsInRole("Moderator"))
+            {
+                MailAddress from = new MailAddress("LifeboyuModerator@yandex.ru", "Lifebouy Moderator");
+                MailAddress to = new MailAddress(email);
+                MailMessage m = new MailMessage(from, to);
+                m.Subject = "Подтверждение роли провайдера";
+                m.Body = "Вы запросили подтверждение роли провайдера. Если вы получили это письмо по ошибке, просто игнорируйте его.\n " +
+                    "Для завершения подтверждения вам необходимо выслать свои реквизиты на этот адрес: LifeboyuModerator@yandex.ru";
+                SmtpClient smtp = new SmtpClient("smtp.yandex.ru", 587);
+                smtp.Port = 587;
+                smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
+                smtp.EnableSsl = true;
+                smtp.Credentials = new NetworkCredential("LifeboyuModerator", "1716141q");
+                smtp.Send(m);
+                return RedirectToAction("ModeratorPage", "Admin");
+            }
+            else
+                return View("AccessDenied");
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -223,3 +299,6 @@ namespace Lifebuoy.Controllers
         }
     }
 }
+
+//provider.providerov@mail.ru
+//1716141q

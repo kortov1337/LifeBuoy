@@ -13,6 +13,7 @@ namespace Lifebuoy.Controllers
     {
         private OffersContext db = new OffersContext();
         private OffersContext db1 = new OffersContext();
+        private ApplicationDbContext adb = new ApplicationDbContext();
 
         public ActionResult Index(string categories, string providers, string cities)
         {
@@ -79,7 +80,7 @@ namespace Lifebuoy.Controllers
 
             return View(olv);
         }
-        //public ActionResult ShowOffer(string id)
+
         public ActionResult ShowOffer(int? id)
         {
             List<String> Images = new List<string>();
@@ -104,24 +105,39 @@ namespace Lifebuoy.Controllers
         }
 
         [HttpPost]
-        public ActionResult SendRating(int? id, int rating)
+        public ActionResult SendRating(int id, int rating)
         {
-            var offer = db.Offers.Find(id);
-            if(offer!=null)
+            if(User.Identity.IsAuthenticated)
             {
-                if(offer.Rating == 0)
+                var userVote = db.UsersVotes.FirstOrDefault(uv => uv.UserName == User.Identity.Name & uv.OfferId == id);
+                if (userVote == null)
                 {
-                    offer.Rating = rating;
+                    var offer = db.Offers.Find(id);
+                    if (offer != null)
+                    {
+                        if (offer.Rating == 0)
+                        {
+                            offer.Rating = rating;
+                        }
+                        else
+                            offer.Rating = Convert.ToInt32(Math.Ceiling(Convert.ToDouble((offer.Rating + rating) / 2)));
+
+                        db.UsersVotes.Add(new UsersVotes { OfferId = id, UserName = User.Identity.Name });
+                        offer.VotesCount += 1;
+                        db.SaveChanges();
+                        return Json(new { success = true, responseText = "Ваш голос учтён." }, JsonRequestBehavior.AllowGet);
+                    }
+                    else
+                        return Json(new { success = false, responseText = "Призошла ошибка." }, JsonRequestBehavior.AllowGet);
+
                 }
                 else
-                    offer.Rating = Convert.ToInt32(Math.Ceiling(Convert.ToDouble((offer.Rating + rating) / 2)));
-                db.SaveChanges();
-                return Json(new { success = true, responseText = "Ваш голос учтён." }, JsonRequestBehavior.AllowGet);
+                {
+                    return Json(new { success = false, responseText = "Вы уже голосовали." }, JsonRequestBehavior.AllowGet);
+                }
             }
             else
-            {
-                return Json(new { success = false, responseText = "Произошла ошибка." }, JsonRequestBehavior.AllowGet);
-            }
+                return Json(new { success = false, responseText = "Авторизуйтесь для голосования" }, JsonRequestBehavior.AllowGet);
         }
     }
 }

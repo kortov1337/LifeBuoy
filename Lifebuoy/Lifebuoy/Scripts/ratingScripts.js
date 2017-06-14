@@ -17,7 +17,7 @@ function sendRating(offerid, rating, resultid) {
                 label.html(response.responseText);
             } else {
                 var label = $('#' + resultid);
-                label.html = response.responseText;
+                label.html(response.responseText);
             }
         },
         error: function (response) {

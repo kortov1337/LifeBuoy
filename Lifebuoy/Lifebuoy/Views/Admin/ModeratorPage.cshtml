@@ -45,8 +45,7 @@
                         @Html.DisplayFor(modelItem => item.CatalogName)
                     </td>
                     <td>
-                        <a class="catalog-link" href="@Url.Action("ModerateOffer","Admin", new { id = item.Id })">Модерировать</a>
-                        @*<a class="catalog-link" href="@Url.Action("ModerateOffer","Admin", new { id = item.Id })">Удалить</a>*@
+                        <a class="catalog-link" href="@Url.Action("ModerateOffer", "Admin", new { id = item.Id })">Модерировать</a>                       
                     </td>
                 </tr>
             }
@@ -72,26 +71,24 @@
                     Статус
                 </th>
                 <th></th>
-            </tr>
-            @if (Model.Count() == 0)
-            {
-                <tr>
-                    <td>
-                        Нет предложений ждущих модерацию.
-                    </td>
-                </tr>
-            }
+            </tr>         
             @foreach (Lifebuoy.Models.Offers item in ViewBag.AllOffers)
             {
                 <tr>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Provider)
+                        <p>
+                            @Html.DisplayFor(modelItem => item.Provider)
+                        </p>
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Category)
+                        <p>
+                            @Html.DisplayFor(modelItem => item.Category)
+                        </p>
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.CatalogName)
+                        <p>
+                            @Html.DisplayFor(modelItem => item.CatalogName)
+                        </p>
                     </td>
                     <td>
                         @if (item.isModerated)
@@ -104,8 +101,10 @@
                         }
                     </td>
                     <td>
-                        <a class="catalog-link" href="@Url.Action("ShowOffer","Catalog", new { id = item.catalogID })">Посмотреть</a>
-                        <a class="catalog-link" href="@Url.Action("DeleteOffer","Admin", new { id = item.Id })">Удалить</a>
+                        <p>
+                            <a class="catalog-link" href="@Url.Action("ShowOffer", "Catalog", new { id = item.catalogID })">Посмотреть</a>
+                            <a class="catalog-link" href="@Url.Action("DeleteOffer", "Admin", new { id = item.Id })">Удалить</a>
+                        </p>
                     </td>
                 </tr>
             }
@@ -113,8 +112,55 @@
         </table>
     </div>
     <div id="tabs-3">
-        <p>Mauris eleifend est et turpis. Duis id erat. Suspendisse potenti. Aliquam vulputate, pede vel vehicula accumsan, mi neque rutrum erat, eu congue orci lorem eget lorem. Vestibulum non ante. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Fusce sodales. Quisque eu urna vel enim commodo pellentesque. Praesent eu risus hendrerit ligula tempus pretium. Curabitur lorem enim, pretium nec, feugiat nec, luctus a, lacus.</p>
-        <p>Duis cursus. Maecenas ligula eros, blandit nec, pharetra at, semper at, magna. Nullam ac lacus. Nulla facilisi. Praesent viverra justo vitae neque. Praesent blandit adipiscing velit. Suspendisse potenti. Donec mattis, pede vel pharetra blandit, magna ligula faucibus eros, id euismod lacus dolor eget odio. Nam scelerisque. Donec non libero sed nulla mattis commodo. Ut sagittis. Donec nisi lectus, feugiat porttitor, tempor ac, tempor vitae, pede. Aenean vehicula velit eu tellus interdum rutrum. Maecenas commodo. Pellentesque nec elit. Fusce in lacus. Vivamus a libero vitae lectus hendrerit hendrerit.</p>
+        <table class="table admin-table">
+            <tr>
+                <th>
+                    Провайдер
+                </th>
+                <th>
+                    Подтвержден
+                </th>
+                <th></th>
+            </tr>
+            @if (ViewBag.ProviderRequests == null)
+            {
+                <tr>
+                    <td>
+                        Нет запросов ждущих подтверждения.
+                    </td>
+                </tr>
+            }
+            else
+            { 
+            foreach (Lifebuoy.Models.ProvidersRequests item in ViewBag.ProviderRequests)
+            {
+                <tr>
+                    <td>
+                        <p>
+                            @Html.DisplayFor(modelItem => item.Email)
+                        </p>
+                    </td>
+                    <td>
+                        @if (item.isConfirmed)
+                        {
+                            <p>Подветрждено</p>
+                        }
+                        else
+                        {
+                            <p>Ожидает подтверждения</p>
+                        }
+                    </td>
+                    <td>
+                        <p>
+                            <a class="catalog-link" href="@Url.Action("SendConfirmation","Admin", new { email = item.Email})">Отправить письмо |</a>
+                            <a class="catalog-link" href="@Url.Action("ConfirmProvider","Admin", new { email = item.Email})">Утвердить роль |</a>
+                            <a class="catalog-link" href="@Url.Action("DeleteRequest","Admin", new { id = item.Id })">Удалить запрос</a>
+                        </p>
+                    </td>
+                </tr>
+            }
+            }
+        </table>
     </div>
 </div>
 
