@@ -1,0 +1,170 @@
+﻿@model Lifebuoy.Models.Offers
+
+@{
+    ViewBag.Title = "Добавление записи";
+}
+<div class="row">
+    <h2>Добавление записи</h2>
+    @using (Html.BeginForm("Create", "Constructor", FormMethod.Post, new { enctype = "multipart/form-data", id = "form" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal create-form">
+            <h3>Заполните поля приведённые ниже. Эта информация будет отображаться на странице Вашего предложения.</h3>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <input class="text-box single-line" id="CatalogImg" name="CatalogImg" style="display:none;" type="text" value="">
+            <input id="Rating" style="display:none;" name="Rating" type="number" value="0">
+
+            <div class="row">
+                @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-1-spec" })
+                <div class="col-md-10">
+                    <textarea class="form-control description-textbox text-box " id="Description" placeholder="Введите описание своего предложения..." 
+                              name="Description" value="" rows="10"></textarea>
+                    @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            
+            <div class="row">
+                @Html.LabelFor(model => model.ShortDescription, htmlAttributes: new { @class = "control-label col-md-1-spec" })
+                <div class="col-md-10">
+                    <textarea class="form-control short-description-textbox text-box " maxlength="300" id="ShortDescription" placeholder="Введите краткое описание (3-4 предложения)" name="ShortDescription" value="" rows="3"></textarea>
+                    @Html.ValidationMessageFor(model => model.ShortDescription, "", new { @class = "text-danger" })
+                </div>
+            </div>
+           
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-5">
+                            <div class="row">
+                                @Html.LabelFor(model => model.Category, htmlAttributes: new { @class = "control-label col-md-4" })
+                                <div class="col-md-8">
+                                    @Html.EditorFor(model => model.Category, new { htmlAttributes = new { @class = "form-control", @placeholder = "Категория услуги (бассейн,зал и.т.д.)" } })
+                                    @Html.ValidationMessageFor(model => model.Category, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-5">
+                            <div class="row">
+                                @Html.LabelFor(model => model.Provider, htmlAttributes: new { @class = "control-label col-md-4" })
+                                <div class="col-md-8">
+                                    @Html.EditorFor(model => model.Provider, new { htmlAttributes = new { @class = "form-control", @placeholder = "Это ваше имя в каталоге" } })
+                                    @Html.ValidationMessageFor(model => model.Provider, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-5">
+                            <div class="row">
+                                @Html.LabelFor(model => model.CatalogName, htmlAttributes: new { @class = "control-label col-md-4" })
+                                <div class="col-md-8">
+                                    @Html.EditorFor(model => model.CatalogName, new { htmlAttributes = new { @class = "form-control", @placeholder = "Название заведения для каталога" } })
+                                    @Html.ValidationMessageFor(model => model.CatalogName, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-5">
+                            <div class="row">
+                                @Html.LabelFor(model => model.Contacts, htmlAttributes: new { @class = "control-label col-md-4" })
+                                <div class="col-md-8">
+                                    @Html.EditorFor(model => model.Contacts, new { htmlAttributes = new { @class = "form-control", @placeholder = "+375(__)___-__-__" } })
+                                    @Html.ValidationMessageFor(model => model.Contacts, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-5">
+                            <div class="row">
+                                @Html.LabelFor(model => model.WorkingHours, htmlAttributes: new { @class = "control-label col-md-4" })
+                                <div class="col-md-8">
+                                    @Html.EditorFor(model => model.WorkingHours, new { htmlAttributes = new { @class = "form-control", @placeholder = "С __.__ до __.__" } })
+                                    @Html.ValidationMessageFor(model => model.WorkingHours, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-5">
+                            <div class="row">
+                                @Html.LabelFor(model => model.Prices, htmlAttributes: new { @class = "control-label col-md-4" })
+                                <div class="col-md-8">
+                                    @Html.EditorFor(model => model.Prices, new { htmlAttributes = new { @class = "form-control", @placeholder = "ПН-ЧТ 12р/ч. ПТ-ВС 15р/ч." } })
+                                    @Html.ValidationMessageFor(model => model.Prices, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-5">
+                            <div class="row">
+                                @Html.LabelFor(model => model.City, htmlAttributes: new { @class = "control-label col-md-4" })
+                                <div class="col-md-8">
+                                    @Html.EditorFor(model => model.City, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-5">
+                            <div class="row">
+                                @Html.LabelFor(model => model.Adress, htmlAttributes: new { @class = "control-label col-md-4" })
+                                <div class="col-md-8">
+                                    @Html.EditorFor(model => model.Adress, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <label class="control-label col-md-1-spec">Выбор фотографий</label>
+                <div class="col-md-7">
+                    <div class="input-group">
+                        <label class="input-group-btn">
+                            <span class="btn btn-primary">
+                                Открыть... <input type="file" id="file" name="files" style="display: none;" multiple accept="image/jpeg,image/png,image/gif">
+                            </span>
+                        </label>
+                        <input type="text" class="upload-input" readonly="">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div  class="col-md-12">   
+                    <div id="images_row" class="img-preview-row"></div>           
+                    <label id="imgs" class="control-label" style="display:none">Необходимо выбрать хотя бы одно изображение</label>
+                    <label id="catImg" class="control-label" style="display:none">Не забудьте выбрать изображение, которое будет отображено в каталоге</label>     
+                    
+                    
+                </div>
+            </div> 
+            
+            <div class="col-md-12 ">
+                <input type="submit" value="Добавить" class="preview-btn"/>
+            </div>           
+          
+         </div>
+    }
+</div>
+
+<div>
+    @Html.ActionLink("Назад", "Dashboard")
+</div>
+<script src="~/Scripts/uploadImagesScripts.js" type="text/javascript"></script>
+<script src="~/Scripts/jquery.maskedinput.min.js" type="text/javascript"></script>

@@ -1,0 +1,81 @@
+﻿@model IEnumerable<Lifebuoy.Models.Offers>
+
+@{
+    ViewBag.Title = "Dashboard";
+}
+<div class="row main-page-row" >
+    <div class="col-md-12 ">
+        <h2>Рабочая панель</h2>
+        <p>
+            @Html.ActionLink("Добавить запись", "Create")
+        </p>
+    </div>
+</div>
+<div class="row dashboard-page-row">
+    <div class= "col-md-10 ">
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.CatalogImg)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Category)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.City)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.isModerated)
+                </th>
+                <th></th>
+            </tr>
+            @if (Model.Count() == 0)
+            {
+                <tr>
+                    <td>
+                        У вас ещё нет записей.
+                    </td>
+                </tr>
+            }
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.Raw("<img class='dashboard-tumbnail' src=\"data:image/jpeg;base64," + item.CatalogImg + "\" />")                      
+                    </td>
+                    <td>
+                        <p>
+                            @Html.DisplayFor(modelItem => item.Category)
+                        </p>
+                    </td>
+                    <td>
+                        <p>
+                            @Html.DisplayFor(modelItem => item.City)
+                        </p>
+                    </td>
+                    <td>
+                        @if(item.isModerated)
+                        {
+                            <p>Проверено</p>
+                        }
+                        else
+                        {
+                            <p>Ожидает проверки</p>
+                        }
+                    </td>
+                    <td>
+                        <p>
+                            @Html.ActionLink("Редактировать", "Edit", new { id = item.Id }) |
+                            <a class="catalog-link" href="@Url.Action("ShowOffer","Catalog", new { id = item.Id })">Подробнее</a>|
+                            @Html.ActionLink("Удалить", "Delete", new { id = item.Id })
+                        </p>
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </div>
+    <div class="col-md-2 banner" align="center">
+        <img src="~/Content/images/banner-const.jpg" class="img-responsive" />
+    </div>
+</div>

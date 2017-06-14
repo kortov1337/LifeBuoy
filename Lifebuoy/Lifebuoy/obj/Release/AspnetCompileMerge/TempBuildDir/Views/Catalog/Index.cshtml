@@ -1,0 +1,69 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+    Layout = "~/Views/Shared/_CatalogLayout.cshtml";
+}
+
+@model Lifebuoy.Models.OffersListView
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<link href="~/Content/starwars.css" rel="stylesheet" />
+<script src="~/Scripts/starwars.js"></script>
+<script src="~/Scripts/ratingScripts.js"></script>
+
+@if (Model.Offers.Count() == 0)
+{
+    <tr>
+        <td>
+            Нет совпадений. Попробуйте изменить запрос.
+        </td>
+    </tr>
+}
+else {
+    int count = 1;
+    foreach (var item in Model.Offers)
+    {
+        string rbarId = "rbar" + @count;
+        string vId = "vote_result" + @count;
+                <div class="row catalog-row-bg">
+                    <div class="col-md-6">
+                        @Html.Raw("<img class='img-rounded catalog-img' src=\"data:image/jpeg;base64," + item.CatalogImg + "\" />")
+                    </div>
+                    <div class="col-md-6">
+                        <div class="catalog-row">                           
+                            <a class="catalog-link" href="@Url.Action("ShowOffer","Catalog", new { id = item.Id })">@item.CatalogName</a>
+                            <span class="catalog-category">@item.Category</span>
+                        </div>
+                        <div class="catalog-row">
+                            <p class="catalog-info">@item.ShortDescription</p>
+                        </div>
+                        <div class="catalog-row">
+                            <p class="catalog-info catalog-info-hightlighted">Услугу предоставляет: @item.Provider</p>
+                        </div>
+                        <div class="catalog-row">
+                            <p class="catalog-info catalog-info-hightlighted">Адрес: @item.City, @item.Adress</p>
+                        </div>
+                        <div class="catalog-row">
+                            <p class="catalog-info">Рабочие часы: @item.WorkingHours</p>
+                        </div>
+                        <div class="catalog-row">
+                            <p class="catalog-info">Контакты: @item.Contacts</p>
+                        </div>
+                        <div class="catalog-row">
+                            <p class="catalog-info catalog-info-hightlighted">Стоимость: @item.Prices</p>
+                        </div>
+                        <div class="catalog-row" id=@rbarId></div>
+                        <div class="catalog-row">
+                            <p class="catalog-info catalog-info-hightlighted catalog-info-votescount" >Всего оценок: @item.VotesCount</p></div>
+                        <div class="catalog-row">
+                            <p class="catalog-info" id=@vId></p>
+                        </div>                      
+                    </div>
+                </div>
+    <script>
+        var id = 'rbar'+@count;
+        var vid = 'vote_result'+@count;
+        rbarInit(id,@item.Rating,@item.Id,vid);
+    </script>
+        count++;
+    }
+}
+
