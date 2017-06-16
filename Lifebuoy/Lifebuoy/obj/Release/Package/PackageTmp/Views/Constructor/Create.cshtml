@@ -20,7 +20,7 @@
             <div class="row">
                 @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-1-spec" })
                 <div class="col-md-10">
-                    <textarea class="form-control description-textbox text-box " id="Description" placeholder="Введите описание своего предложения..." 
+                    <textarea class="form-control description-textbox text-box " maxlength="500" id="Description" placeholder="Введите описание своего предложения..." 
                               name="Description" value="" rows="10"></textarea>
                     @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
                 </div>

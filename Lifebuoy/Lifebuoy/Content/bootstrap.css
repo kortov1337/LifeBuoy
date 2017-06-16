@@ -119,6 +119,11 @@ summary {
     height:45px;
 }
 
+.review-btn-box {
+
+    /*border: 1px solid red;*/
+  }
+
 #sidebar {
     font-size:1.2em;
     margin: 0;
@@ -444,6 +449,12 @@ select.minimal:focus {
     word-wrap:break-word;
     resize:vertical;
 }
+.review-textbox {
+    max-height:200px;
+    word-wrap:break-word;
+    resize:vertical;
+}
+
 .banner {
     margin-top: 10px;
     margin-bottom: 10px;

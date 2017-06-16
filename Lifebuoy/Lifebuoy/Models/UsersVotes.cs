@@ -9,6 +9,6 @@ namespace Lifebuoy.Models
     {
         public int Id { get; set; }
         public int OfferId { get; set; }
-        public string UserName { get; set; }
+        public string UserName { get; set; }     
     }
 }

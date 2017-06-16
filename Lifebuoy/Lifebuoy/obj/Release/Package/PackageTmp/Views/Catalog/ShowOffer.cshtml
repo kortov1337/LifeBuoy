@@ -81,7 +81,66 @@
                 </p>
             </div>
         </div>
-    </div>
+        <div class="row main-page-row">
+            <div class="col-md-12">
+                <h3>Оставьте свой отзыв...</h3>
+                    @using (Ajax.BeginForm("AddReview", new { }, new AjaxOptions { UpdateTargetId = "results", OnComplete = "OnComplete" }, new { @class = "form-horizontal", @id = "form" }))
+                    {
+
+                        <fieldset>
+    
+                            <input id="OfferId" style="display:none;" name="OfferId" type="number" value=@Model.Id>
+    
+                            <div class="form-group">
+                            <label class="col-md-3 control-label" for="name">Ваше имя</label>
+                            <div class="col-md-6">
+                                <input id="name" name="name" type="text" class="form-control">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="title">Заголовок</label>
+                            <div class="col-md-6">
+                                <input id="title" name="title" type="text" placeholder="Кратко изложите суть отзыва" class="form-control">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="review">Ваш отзыв</label>
+                            <div class="col-md-6">
+                                <textarea class="form-control review-textbox" id="review" name="review" maxlength="500" placeholder="Введите текст сюда..." rows="5"></textarea>
+                            </div>                          
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="message"></label>
+                            <div class="col-md-6 review-btn-box">                              
+                                <button type="submit" class="btn btn-success btn-md col-md-6">Отправить</button>                                                              
+                                <button type="reset" class="btn btn-danger btn-md col-md-6">Очистить</button>
+                            </div>
+                        </div>
+
+                        <!-- Rating -->
+                        @*<div class="form-group">
+                            <label class="col-md-3 control-label" for="message">Your rating</label>
+                            <div class="col-md-9">
+                                <div class="star-rating rating-xs rating-active"><div class="clear-rating clear-rating-active" title="Clear"><i class="glyphicon glyphicon-minus-sign"></i></div><div class="rating-container rating-gly-star" data-content=""><div class="rating-stars" data-content="" style="width: 50%;"></div><input id="input-21e" value="0" type="number" class="rating form-control" min="0" max="5" step="0.5" data-size="xs" style="display: none;"></div><div class="caption"><span class="label label-info">Two &amp; Half Stars</span></div></div>
+                            </div>
+                        </div>*@
+
+                    </fieldset>
+                    }
+            </div>
+        </div>
+        <div class="row main-page-row">
+            <div class="col-md-12">
+                <h3>... или прочитайте отзывы других посетителей.</h3>
+                <div id="results"></div>
+                
+            </div>
+        </div>
+   
+     </div>
 </div>
 <div>
     @Html.ActionLink("В каталог", "Index")
@@ -90,3 +149,15 @@
 <script>
     rbarInit('rbar',@Model.Rating,@Model.Id,'vote_result');
 </script>
+<script>
+$(document).ready(function () {
+    $("#results").load("@Url.Action("LoadReviews", "Catalog",new {id = Model.Id } )");
+});
+    function OnComplete()
+    {
+        $('#form').each(function(){
+            this.reset();
+        });
+    }
+</script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>

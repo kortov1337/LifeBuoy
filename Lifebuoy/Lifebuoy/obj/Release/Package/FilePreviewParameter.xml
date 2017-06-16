@@ -1,13 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <parameters>
   <parameter name="IIS Web Application Name" description="" value="kortov1337-001-site1" tags="IisApp">
-    <parameterEntry kind="ProviderPath" scope="IisApp" match="^d:\\Диплом\\Lifebuoy\ -\ копия\\Lifebuoy\\obj\\Release\\Package\\PackageTmp$" />
-    <parameterEntry kind="ProviderPath" scope="setAcl" match="^d:\\Диплом\\Lifebuoy\ -\ копия\\Lifebuoy\\obj\\Release\\Package\\PackageTmp$" />
+    <parameterEntry kind="ProviderPath" scope="IisApp" match="^d:\\Диплом\\Lifebuoy\\Lifebuoy\\obj\\Release\\Package\\PackageTmp$" />
+    <parameterEntry kind="ProviderPath" scope="setAcl" match="^d:\\Диплом\\Lifebuoy\\Lifebuoy\\obj\\Release\\Package\\PackageTmp$" />
   </parameter>
-  <parameter name="DefaultConnection-Web.config Connection String" description="" value="Server=sql6002.smarterasp.net;Database=DB_A269B0_Lifebouy;User Id=DB_A269B0_Lifebouy_admin;Password=Lol_petrovna1;" tags="">
-    <parameterEntry kind="XmlFile" scope="d:\\Диплом\\Lifebuoy\ -\ копия\\Lifebuoy\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='DefaultConnection']/@connectionString" />
+  <parameter name="DefaultConnection-Web.config Connection String" description="" value="Data Source=SQL6002.SmarterASP.NET;Database=DB_A269B0_Lifebouy;User Id=DB_A269B0_Lifebouy_admin;Password=Lol_petrovna1;" tags="">
+    <parameterEntry kind="XmlFile" scope="d:\\Диплом\\Lifebuoy\\Lifebuoy\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='DefaultConnection']/@connectionString" />
   </parameter>
-  <parameter name="Lifebuoy.DAL.OffersContext-Web.config Connection String" description="" value="Lifebuoy.DAL.OffersContext_ConnectionString" tags="">
-    <parameterEntry kind="XmlFile" scope="d:\\Диплом\\Lifebuoy\ -\ копия\\Lifebuoy\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='Lifebuoy.DAL.OffersContext']/@connectionString" />
+  <parameter name="OffersContext-Web.config Connection String" description="" value="Data Source=SQL6002.SmarterASP.NET;Database=DB_A269B0_Lifebouy;User Id=DB_A269B0_Lifebouy_admin;Password=Lol_petrovna1;" tags="">
+    <parameterEntry kind="XmlFile" scope="d:\\Диплом\\Lifebuoy\\Lifebuoy\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='OffersContext']/@connectionString" />
   </parameter>
 </parameters>

@@ -17,6 +17,8 @@ namespace Lifebuoy.Controllers
 
         public ActionResult Index(string categories, string providers, string cities)
         {
+           
+
             IQueryable<Offers> offers = db.Offers;
             List<Offers> moderatedOffers = new List<Offers>();
             List<int> offIds = new List<int>();
@@ -32,11 +34,12 @@ namespace Lifebuoy.Controllers
                 if(offer!=null)
                     moderatedOffers.Add(offer);
             }
+
             offers = moderatedOffers.AsQueryable();
 
             if (!String.IsNullOrEmpty(categories)&&!categories.Equals("Не выбрано"))
             {
-                offers = offers.Where(o => o.Category == categories);
+                offers = offers.Where(o => o.Category == categories);               
             }
 
             if (!String.IsNullOrEmpty(providers) && !providers.Equals("Не выбрано"))
@@ -49,23 +52,25 @@ namespace Lifebuoy.Controllers
                 offers = offers.Where(o => o.City == cities);
             }
 
-           
             var city = db.Offers
-                .OrderBy(c => c.City)
-                .Select(c => c.City).Distinct().ToList();
+              .OrderBy(c => c.City)
+              .Select(c => c.City).Distinct().ToList();
 
-            var category = db.Offers
+            var category =  offers
                 .OrderBy(c => c.Category)
                 .Select(c => c.Category).Distinct().ToList();
 
-            var provider = db.Offers
+            var provider = offers
                 .OrderBy(c => c.Provider)
                 .Select(c => c.Provider).Distinct().ToList();
+
+
 
             city.Insert(0, "Не выбрано");
             provider.Insert(0, "Не выбрано");
             category.Insert(0, "Не выбрано");
             offers = offers.OrderByDescending(o => o.Rating);
+
             OffersListView olv = new OffersListView
             {
                 Offers = offers.ToList(),
@@ -90,8 +95,6 @@ namespace Lifebuoy.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-
-            //Offers offer = db.Offers.FirstOrDefault(a => a.catalogID == id);
             Offers offer = db.Offers.Find(id);
             splitResult = offer.Images.Split(';');
             Images = splitResult.ToList();
@@ -100,6 +103,7 @@ namespace Lifebuoy.Controllers
             {
                 return HttpNotFound();
             }
+            
             ViewBag.Images = Images;
             return View(offer);
         }
@@ -138,6 +142,42 @@ namespace Lifebuoy.Controllers
             }
             else
                 return Json(new { success = false, responseText = "Авторизуйтесь для голосования" }, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public ActionResult AddReview(int OfferId, string name, string title, string review)
+        {
+            db.UsersReviews.Add(new Reviews { OfferId = OfferId, UserId = User.Identity.Name, Review = review, Author = name, Title = title, Date = DateTime.Now});
+            db.SaveChanges();
+
+            var reviews = db.UsersReviews.Where(rv => rv.OfferId == OfferId)
+                .OrderByDescending(rv => rv.Date)
+                .ToList();
+            return PartialView("AddReview",reviews);
+        }
+
+        public ActionResult LoadReviews(int id)
+        {
+            var reviews = db.UsersReviews.Where(rv => rv.OfferId == id)
+                 .OrderByDescending(rv => rv.Date)
+                 .ToList();
+            return PartialView("AddReview", reviews);
+        }
+
+        public ActionResult DeleteReview (int id)
+        {
+            var review = db.UsersReviews.Find(id);
+            if (review != null)
+            {
+                var offerId = review.OfferId;
+                db.UsersReviews.Remove(review);
+                db.SaveChanges();
+
+                return RedirectToAction("ShowOffer", new { id = offerId });
+            }
+            else
+                return HttpNotFound();
+
         }
     }
 }

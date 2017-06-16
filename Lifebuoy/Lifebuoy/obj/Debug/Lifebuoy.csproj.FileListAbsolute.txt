@@ -71,7 +71,6 @@ d:\Диплом\Lifebuoy\Lifebuoy\bin\PagedList.dll
 d:\Диплом\Lifebuoy\Lifebuoy\bin\PagedList.Mvc.dll
 d:\Диплом\Lifebuoy\Lifebuoy\bin\PagedList.xml
 d:\Диплом\Lifebuoy\Lifebuoy\bin\PagedList.Mvc.xml
-d:\Диплом\Lifebuoy\Lifebuoy\obj\Debug\Lifebuoy.Migrations.qwe.resources
 d:\Диплом\Lifebuoy\Lifebuoy\obj\Debug\Lifebuoy.csproj.GenerateResource.Cache
 d:\Диплом\Lifebuoy - копия\Lifebuoy\bin\roslyn\csc.exe
 d:\Диплом\Lifebuoy - копия\Lifebuoy\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
@@ -148,3 +147,5 @@ d:\Диплом\Lifebuoy - копия\Lifebuoy\obj\Debug\Lifebuoy.Migrations.qwe
 d:\Диплом\Lifebuoy - копия\Lifebuoy\obj\Debug\Lifebuoy.csproj.GenerateResource.Cache
 d:\Диплом\Lifebuoy - копия\Lifebuoy\obj\Debug\Lifebuoy.dll
 d:\Диплом\Lifebuoy - копия\Lifebuoy\obj\Debug\Lifebuoy.pdb
+d:\Диплом\Lifebuoy\Lifebuoy\obj\Debug\Lifebuoy.Properties.Resources.resources
+d:\Диплом\Lifebuoy\Lifebuoy\obj\Debug\Lifebuoy.Migrations._122.resources

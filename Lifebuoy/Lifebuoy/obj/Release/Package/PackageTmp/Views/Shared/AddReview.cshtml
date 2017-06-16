@@ -1,0 +1,39 @@
+﻿@model IEnumerable<Lifebuoy.Models.Reviews>
+@if(Model.Count() == 0)
+{
+    <p>У этого предложения ещё нет отзывов</p>
+}
+else { 
+foreach (var item in Model)
+{
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <span itemscope="" itemtype="http://schema.org/Review">
+                <h3 class="panel-title" itemprop="name"><b>@item.Title</b></h3>
+            </span>
+        </div>
+        <div class="panel-body" itemprop="reviewBody">
+            <p>
+                @item.Review
+            </p>
+
+            <span itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+                <small>
+                    <span itemprop="name">@item.Author</span>
+                </small>
+            </span><!--/author schema -->
+            <small>
+                <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
+                <meta itemprop="datePublished" content=@item.Date.ToShortDateString()>@item.Date.ToShortDateString()
+            </small>
+            @if ((Request.IsAuthenticated && item.UserId == User.Identity.Name) || User.IsInRole("Moderator"))
+            {
+                <div>
+                    <a class="catalog-link" href="@Url.Action("DeleteReview","Catalog", new { id = item.Id })">Удалить</a>
+                </div>
+            }
+            
+        </div>
+    </div>
+}
+}

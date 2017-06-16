@@ -5,9 +5,7 @@
 }
 
 <div class="row">
-    <h2>Редактирование записи</h2>
-        @*@using (Html.BeginForm("Edit", "Constructor", FormMethod.Post, new { enctype = "multipart/form-data", id = "form" }))
-        {*@
+    <h2>Редактирование записи</h2>     
         <form action="/Constructor/Edit" enctype="multipart/form-data" id="form" method="post">
          @Html.AntiForgeryToken()
             <div class="form-horizontal create-form">
@@ -134,20 +132,6 @@
                         </div>
                     </div>
                 </div>              
-                
-                @*<div class="row">
-                    <label class="control-label col-md-1-spec">Выбор фотографий</label>
-                    <div class="col-md-7">
-                        <div class="input-group">
-                            <label class="input-group-btn">
-                                <span class="btn btn-primary">
-                                    Открыть... <input type="file" id="file" name="files" style="display: none;" multiple accept="image/jpeg,image/png,image/gif">
-                                </span>
-                            </label>
-                            <input type="text" class="upload-input" readonly="">
-                        </div>
-                    </div>
-                </div>*@
 
                 <div class="row">
                     <div class="col-md-12">
@@ -164,7 +148,6 @@
                                 counter++;
                             }
                         </div>
-                        @*<label id="imgs" class="control-label" style="display:none">Необходимо выбрать хотя бы одно изображение</label>*@
                         <label id="catImg" class="control-label" style="display:none">Не забудьте выбрать изображение, которое будет отображено в каталоге</label>
                     </div>
                 </div>
