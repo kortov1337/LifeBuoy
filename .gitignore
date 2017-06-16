@@ -4,5 +4,6 @@
 /*.docx
 /*.pptx
 /Lifebuoy/Lifebuoy/App_Data/*
-/Записка
-*.docx
+/zapiska
+/zapiska/*
+
