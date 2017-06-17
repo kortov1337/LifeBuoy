@@ -7,13 +7,13 @@ namespace Lifebuoy.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class _122 : IMigrationMetadata
+    public sealed partial class qwe : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(_122));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(qwe));
         
         string IMigrationMetadata.Id
         {
-            get { return "201706152139053_122"; }
+            get { return "201706161741206_qwe"; }
         }
         
         string IMigrationMetadata.Source

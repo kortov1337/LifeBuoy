@@ -1,0 +1,47 @@
+﻿@using (Html.BeginForm("SkinSettings", "Constructor", FormMethod.Post))
+{   
+<div class="constructor-sidebar" >
+    <input type="text" id="offerId" name="offerId" style="visibility:hidden" />
+    <div class="const-sbar-row">
+        <p class="const-section-name">Отображение фотографий</p>
+        <div class="radio">
+            <label><input type="radio" name="pic" value="carusel" checked />Карусель</label>
+        </div>
+        <div class="radio">
+            <label><input type="radio" name="pic" value="gallery" />Галерея</label>
+        </div>
+    </div>
+    <div class="const-sbar-row">
+        <p class="const-section-name">Фоновое изображение</p>
+        <div class="radio">
+            <label><input type="radio" name="fon" checked value="empty" />Без фона</label>
+        </div>
+        <div class="radio">
+            <label><input type="radio" name="fon" value="pic" />Картинка</label>
+        </div>
+        <div class="form-group">
+            <input type='file' id='verborgen_file' name="background" />
+            <input type="text" id="backgr" name="backgr" style="visibility:hidden" />
+            <input type="button" value="Загрузить" disabled id="uploadButton" />
+        </div>
+    </div> 
+    <div class="const-sbar-row">
+        <p class="const-section-name">Дополнительные функции</p>
+        <div class="checkbox">
+            <label><input type="checkbox" id="hot" name="hot" value="hot" />Поле "Горячее предложение"</label>
+        </div>
+        <div class="checkbox">
+            <label><input type="checkbox" id="hightlight" name="hightlight" value="hightlight" />Выделение при серьёзном обновлении</label>
+        </div>
+    </div>   
+    <div class="const-sbar-row">         
+        <div class="form-group">
+            <input type="submit" class="btn btn-success btn-md" value="Отправить" />
+            <input type="reset" class="btn btn-danger btn-md" value="Очистить" />
+            @Html.ActionLink("Назад", "Dashboard",new { },new {@class = "btn btn-info" })
+        </div>  
+    </div> 
+
+</div>
+@Html.AntiForgeryToken()
+}

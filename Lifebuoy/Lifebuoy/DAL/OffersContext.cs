@@ -15,5 +15,6 @@ namespace Lifebuoy.DAL
         public DbSet<ProvidersRequests> ProvidersRequests { get; set; }
         public DbSet<UsersVotes> UsersVotes { get; set; }
         public DbSet<Reviews> UsersReviews { get; set; }
+        public DbSet<SkinDetails>SkinsDetails { get; set; }
     }
 }

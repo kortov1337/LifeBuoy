@@ -16,6 +16,9 @@ namespace Lifebuoy.Models
 
         public int VotesCount { get; set; }
 
+        [Display(Name = "Строка \"Горячее предложение\"")]
+        public string hotOffer { get; set; }
+
         [Display(Name = "ID для каталога")]
         public string catalogID { get; set; }              
 

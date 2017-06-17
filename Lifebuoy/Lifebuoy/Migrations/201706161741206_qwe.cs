@@ -3,16 +3,16 @@ namespace Lifebuoy.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class _122 : DbMigration
+    public partial class qwe : DbMigration
     {
         public override void Up()
         {
-            AddColumn("dbo.Reviews", "UserId", c => c.String());
+            AddColumn("dbo.Offers", "hotOffer", c => c.String());
         }
         
         public override void Down()
         {
-            DropColumn("dbo.Reviews", "UserId");
+            DropColumn("dbo.Offers", "hotOffer");
         }
     }
 }

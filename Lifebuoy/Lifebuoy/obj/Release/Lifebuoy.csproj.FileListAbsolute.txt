@@ -148,4 +148,4 @@ d:\Диплом\Lifebuoy\Lifebuoy\obj\Release\Lifebuoy.Properties.Resources.reso
 d:\Диплом\Lifebuoy\Lifebuoy\obj\Release\Lifebuoy.csproj.GenerateResource.Cache
 d:\Диплом\Lifebuoy\Lifebuoy\obj\Release\Lifebuoy.dll
 d:\Диплом\Lifebuoy\Lifebuoy\obj\Release\Lifebuoy.pdb
-d:\Диплом\Lifebuoy\Lifebuoy\obj\Release\Lifebuoy.Migrations._122.resources
+d:\Диплом\Lifebuoy\Lifebuoy\obj\Release\Lifebuoy.Migrations.qwe.resources

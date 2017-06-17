@@ -186,9 +186,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201706152139053_122.cs" />
-    <Compile Include="Migrations\201706152139053_122.Designer.cs">
-      <DependentUpon>201706152139053_122.cs</DependentUpon>
+    <Compile Include="Migrations\201706161741206_qwe.cs" />
+    <Compile Include="Migrations\201706161741206_qwe.Designer.cs">
+      <DependentUpon>201706161741206_qwe.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -196,6 +196,7 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\ProvidersRequests.cs" />
     <Compile Include="Models\Reviews.cs" />
+    <Compile Include="Models\SkinDetails.cs" />
     <Compile Include="Models\UsersVotes.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -228,6 +229,7 @@
     <Content Include="Content\images\puzzle.png" />
     <Content Include="Content\images\regular_user.png" />
     <Content Include="Content\images\spends.png" />
+    <Content Include="Content\imgzoom.css" />
     <Content Include="Content\jquery-ui.css" />
     <Content Include="Content\PagedList.css" />
     <Content Include="Content\starwars.css" />
@@ -268,7 +270,11 @@
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery-1.8.3.js" />
+    <Content Include="Scripts\jquery.imgzoom.js" />
+    <Content Include="Scripts\jquery.imgzoom.min.js" />
+    <Content Include="Scripts\jquery.imgzoom.pack.js" />
     <Content Include="Scripts\jquery.maskedinput.min.js" />
+    <Content Include="Scripts\jquery.min.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
@@ -280,9 +286,12 @@
     <Content Include="Scripts\ratingScripts.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\ShowOfferScripts.js" />
     <Content Include="Scripts\SidebarScripts.js" />
+    <Content Include="Scripts\SkinScripts.js" />
     <Content Include="Scripts\starwars.js" />
     <Content Include="Scripts\uploadImagesScripts.js" />
+    <Content Include="Scripts\ZoomScript.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -324,7 +333,7 @@
     <Content Include="Views\Shared\_CatalogLayout.cshtml" />
     <Content Include="Views\Shared\_CatalogSidebarPartial.cshtml" />
     <Content Include="Views\Account\AccountType.cshtml" />
-    <Content Include="Views\Constructor\Create.cshtml" />
+    <Content Include="Views\Constructor\SkinSettings.cshtml" />
     <Content Include="Views\Constructor\Delete.cshtml" />
     <Content Include="Views\Constructor\Details.cshtml" />
     <Content Include="Views\Constructor\Edit.cshtml" />
@@ -338,6 +347,10 @@
     <Content Include="Views\Admin\DeleteUser.cshtml" />
     <Content Include="Views\Admin\DeleteOffer.cshtml" />
     <Content Include="Views\Shared\AddReview.cshtml" />
+    <Content Include="Views\Constructor\FillData.cshtml" />
+    <Content Include="Views\Shared\_ConstructorLayout.cshtml" />
+    <Content Include="Views\Shared\_ConstructorSidebar.cshtml" />
+    <Content Include="Views\Shared\_CatalogOfferLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -353,8 +366,8 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201706152139053_122.resx">
-      <DependentUpon>201706152139053_122.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201706161741206_qwe.resx">
+      <DependentUpon>201706161741206_qwe.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

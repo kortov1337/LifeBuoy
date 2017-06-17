@@ -72,7 +72,6 @@ summary {
 .img-preview-row {
     background-color:#fff;
     min-height:max-content;
-    /*padding:10px;*/
 }
 
 .preview-btn{
@@ -133,7 +132,6 @@ summary {
 }
 
 .sidebar-row {
-    /*display:inline-block;*/
     margin: 0px -15px 10px 0px;
 }
 
@@ -147,15 +145,12 @@ summary {
 
 .sidebar-divider {
     border-left: 1px solid rgba(128, 128, 128, 0.5);
-    /*background-color: white;*/
     padding-top: 10px;
     padding-bottom: 10px;
 }
 
 .catalog-container{
-    /*padding-right: 15px;*/
     margin-right: auto;
-    /*margin-left: 15px;*/
 }
 
 .catalog-row {
@@ -220,7 +215,6 @@ summary {
 .offer-img {
     width: 100%;
     height: auto;
-    /*max-height:600px;*/
 }
 
 #rprow {
@@ -445,7 +439,6 @@ select.minimal:focus {
 }
 
 .short-description-textbox {
-    /*min-height:200px;*/
     word-wrap:break-word;
     resize:vertical;
 }
@@ -459,6 +452,101 @@ select.minimal:focus {
     margin-top: 10px;
     margin-bottom: 10px;
 }
+
+.preview-panel{
+    min-height:550px;
+    background-color:#fff;
+    width:75%;
+    float:left;
+    position: relative;
+    padding-top:35px;
+    padding-left:5px;
+    border: 1px solid rgba(128,128,128,.5);
+    border-collapse:collapse;
+}
+
+.constructor-sidebar{
+    /*height:550px;*/
+    background-color:#fff;
+    width:25%;
+    float:left;
+    position: relative;
+    border-bottom: 1px solid rgba(128,128,128,.5);
+    border-right: 1px solid rgba(128,128,128,.5);
+    border-collapse:collapse;
+}
+
+.const-sbar-row{
+    border-bottom: 1px solid rgba(128,128,128,.5);
+    border-collapse:collapse;
+    padding-top:25px;
+    padding-left:5px;
+    position: relative;
+}
+
+.preview-panel-row{
+   margin-left:0 !important;
+   margin-right:0!important;
+}
+.const-section-name{ 
+    position: absolute; 
+    top:0; 
+    left:0; 
+    padding:2px;
+    margin-top:0!important;
+    margin-bottom:5px;
+    color:white;
+    background-color:#333333;
+    border-radius: 0 0 5px 0;
+}
+.constr-bckgr{
+    background-size:cover;
+    background-repeat:no-repeat;
+    min-height:100%;
+    background-attachment: fixed
+}
+
+.hot-offer {
+    color:#f70909;
+    font-size:1.5em;
+}
+
+.image {	
+	cursor:pointer;	
+}
+
+.popup {
+	position: absolute;
+	height:100%;
+	width:100%;
+	top:0;
+	left:0;
+	display:none;
+	text-align:center;
+}
+
+.popup_bg {
+	background:rgba(0,0,0,0.4);
+	position:absolute;
+	z-index:1;
+	height:100%;
+	width:100%;
+}
+
+
+.popup_img {
+	position: relative;
+	margin:0 auto;
+	z-index:2;
+	max-height:94%;
+	max-width:94%;
+	margin:1% 0 0 0;
+}
+
+.catalog-sidebar {
+    margin-left: 15px !important;
+}
+
 
 audio,
 canvas,
@@ -484,8 +572,6 @@ html {
 }
 
 body {
-  /*margin: 0;*/
-   /*width: 100%;*/
    margin-left:0px;
    margin-top:50px;
    margin-bottom: 50px;
@@ -1268,6 +1354,7 @@ pre code {
 .col-md-1-spec,
 .col-md-2,
 .col-md-3,
+.col-md-3-spec,
 .col-md-4,
 .col-md-5,
 .col-md-6,
@@ -1519,6 +1606,7 @@ pre code {
   .col-md-1-spec,
   .col-md-2,
   .col-md-3,
+  .col-md-3-spec,
   .col-md-4,
   .col-md-5,
   .col-md-6,
@@ -1540,6 +1628,9 @@ pre code {
   }
   .col-md-3 {
     width: 25%;
+  }
+  .col-md-3-spec{
+    width: 27.5%;
   }
   .col-md-4 {
     width: 33.33333333333333%;

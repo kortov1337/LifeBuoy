@@ -5,7 +5,7 @@
 }
 <div class="row">
     <h2>Добавление записи</h2>
-    @using (Html.BeginForm("Create", "Constructor", FormMethod.Post, new { enctype = "multipart/form-data", id = "form" }))
+    @using (Html.BeginForm("FillData", "Constructor", FormMethod.Post, new { enctype = "multipart/form-data", id = "form" }))
     {
         @Html.AntiForgeryToken()
 
@@ -20,12 +20,12 @@
             <div class="row">
                 @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-1-spec" })
                 <div class="col-md-10">
-                    <textarea class="form-control description-textbox text-box " maxlength="500" id="Description" placeholder="Введите описание своего предложения..." 
+                    <textarea class="form-control description-textbox text-box " maxlength="2100" id="Description" placeholder="Введите описание своего предложения (2100 символов)"
                               name="Description" value="" rows="10"></textarea>
                     @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
                 </div>
             </div>
-            
+
             <div class="row">
                 @Html.LabelFor(model => model.ShortDescription, htmlAttributes: new { @class = "control-label col-md-1-spec" })
                 <div class="col-md-10">
@@ -33,7 +33,7 @@
                     @Html.ValidationMessageFor(model => model.ShortDescription, "", new { @class = "text-danger" })
                 </div>
             </div>
-           
+
             <div class="row">
                 <div class="col-md-12">
                     <div class="row">
@@ -82,6 +82,16 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="col-md-6">
+                            <div class="row">
+                                @Html.LabelFor(model => model.hotOffer, htmlAttributes: new { @class = "control-label col-md-6" })
+                                <div class="col-md-6">
+                                    @Html.EditorFor(model => model.hotOffer, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
 
                     <div class="row">
@@ -94,10 +104,10 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-5">
+                        <div class="col-md-6">
                             <div class="row">
-                                @Html.LabelFor(model => model.Prices, htmlAttributes: new { @class = "control-label col-md-4" })
-                                <div class="col-md-8">
+                                @Html.LabelFor(model => model.Prices, htmlAttributes: new { @class = "control-label col-md-6" })
+                                <div class="col-md-6">
                                     @Html.EditorFor(model => model.Prices, new { htmlAttributes = new { @class = "form-control", @placeholder = "ПН-ЧТ 12р/ч. ПТ-ВС 15р/ч." } })
                                     @Html.ValidationMessageFor(model => model.Prices, "", new { @class = "text-danger" })
                                 </div>
@@ -115,25 +125,27 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-5">
+                        <div class="col-md-6">
                             <div class="row">
-                                @Html.LabelFor(model => model.Adress, htmlAttributes: new { @class = "control-label col-md-4" })
-                                <div class="col-md-8">
+                                @Html.LabelFor(model => model.Adress, htmlAttributes: new { @class = "control-label col-md-6" })
+                                <div class="col-md-6">
                                     @Html.EditorFor(model => model.Adress, new { htmlAttributes = new { @class = "form-control" } })
                                     @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger" })
                                 </div>
                             </div>
                         </div>
+
+                    </div>
+
+                    <div class="row">
+                        
                     </div>
                 </div>
             </div>
-            
+
             <div class="row">
                 <label class="control-label col-md-1-spec">Выбор фотографий</label>
-                <div class="col-md-7">
+                <div class="col-md-3-spec">
                     <div class="input-group">
                         <label class="input-group-btn">
                             <span class="btn btn-primary">
@@ -144,22 +156,22 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="row">
-                <div  class="col-md-12">   
-                    <div id="images_row" class="img-preview-row"></div>           
+                <div class="col-md-12">
+                    <div id="images_row" class="img-preview-row"></div>
                     <label id="imgs" class="control-label" style="display:none">Необходимо выбрать хотя бы одно изображение</label>
-                    <label id="catImg" class="control-label" style="display:none">Не забудьте выбрать изображение, которое будет отображено в каталоге</label>     
-                    
-                    
+                    <label id="catImg" class="control-label" style="display:none">Не забудьте выбрать изображение, которое будет отображено в каталоге</label>
+
+
                 </div>
-            </div> 
-            
+            </div>
+
             <div class="col-md-12 ">
-                <input type="submit" value="Добавить" class="preview-btn"/>
-            </div>           
-          
-         </div>
+                <input type="submit" value="Добавить" class="preview-btn" />
+            </div>
+
+        </div>
     }
 </div>
 

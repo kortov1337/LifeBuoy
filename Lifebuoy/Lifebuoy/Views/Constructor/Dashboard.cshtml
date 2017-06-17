@@ -7,12 +7,12 @@
     <div class="col-md-12 ">
         <h2>Рабочая панель</h2>
         <p>
-            @Html.ActionLink("Добавить запись", "Create")
+            @Html.ActionLink("Добавить запись", "FillData")
         </p>
     </div>
 </div>
 <div class="row dashboard-page-row">
-    <div class= "col-md-10 ">
+    <div class= "col-md-12 ">
         <table class="table">
             <tr>
                 <th>
@@ -65,9 +65,11 @@
                     </td>
                     <td>
                         <p>
-                            @Html.ActionLink("Редактировать", "Edit", new { id = item.Id }) |
+                            @Html.ActionLink("Редактировать", "Edit", new { id = item.Id }) |      
+                            <a class="catalog-link" href="@Url.Action("SkinSettings","Constructor", new { id = item.Id })">Конструктор</a>|                     
                             <a class="catalog-link" href="@Url.Action("ShowOffer","Catalog", new { id = item.Id })">Подробнее</a>|
-                            @Html.ActionLink("Удалить", "Delete", new { id = item.Id })
+                            @Html.ActionLink("Удалить", "Delete", new { id = item.Id }) 
+                            
                         </p>
                     </td>
                 </tr>
@@ -75,7 +77,7 @@
 
         </table>
     </div>
-    <div class="col-md-2 banner" align="center">
+    @*<div class="col-md-2 banner" align="center">
         <img src="~/Content/images/banner-const.jpg" class="img-responsive" />
-    </div>
+    </div>*@
 </div>

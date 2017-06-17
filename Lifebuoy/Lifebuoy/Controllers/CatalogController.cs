@@ -17,8 +17,8 @@ namespace Lifebuoy.Controllers
 
         public ActionResult Index(string categories, string providers, string cities)
         {
-           
 
+            ViewBag.SkinDetails = db.SkinsDetails.ToList();
             IQueryable<Offers> offers = db.Offers;
             List<Offers> moderatedOffers = new List<Offers>();
             List<int> offIds = new List<int>();
@@ -105,6 +105,8 @@ namespace Lifebuoy.Controllers
             }
             
             ViewBag.Images = Images;
+            ViewBag.SkinDetails = db.SkinsDetails.FirstOrDefault(sk => sk.OfferId == id);
+
             return View(offer);
         }
 

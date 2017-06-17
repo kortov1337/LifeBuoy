@@ -1,6 +1,7 @@
 ﻿@{
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = "Catalog";
     Layout = "~/Views/Shared/_CatalogLayout.cshtml";
+    List<Lifebuoy.Models.SkinDetails> sd = ViewBag.SkinDetails;
 }
 
 @model Lifebuoy.Models.OffersListView
@@ -29,7 +30,7 @@ else {
                     </div>
                     <div class="col-md-6">
                         <div class="catalog-row">                           
-                            <a class="catalog-link" href="@Url.Action("ShowOffer","Catalog", new { id = item.Id })">@item.CatalogName</a>
+                            <a class="catalog-link" href="@Url.Action("ShowOffer", "Catalog", new { id = item.Id })">@item.CatalogName</a>
                             <span class="catalog-category">@item.Category</span>
                         </div>
                         <div class="catalog-row">
@@ -55,7 +56,21 @@ else {
                             <p class="catalog-info catalog-info-hightlighted catalog-info-votescount" >Всего оценок: @item.VotesCount</p></div>
                         <div class="catalog-row">
                             <p class="catalog-info" id=@vId></p>
-                        </div>                      
+                        </div> 
+                        @{
+                            var details = sd.FirstOrDefault(d => d.OfferId == item.Id);
+
+                            if (details != null)
+                            {
+                                if (details.hotOffer != null)
+                                {
+                                <small id="hot-offer1">
+                                    <span class="glyphicon glyphicon-asterisk hot-offer" aria-hidden="true"></span> 
+                                    <meta>@item.hotOffer
+                                </small>
+                                }
+                            }
+                         }
                     </div>
                 </div>
     <script>

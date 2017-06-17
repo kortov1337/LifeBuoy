@@ -1,0 +1,172 @@
+﻿@model Lifebuoy.Models.Offers
+@{
+    ViewBag.Title = "Catalog";
+    Layout = "~/Views/Shared/_ConstructorLayout.cshtml";
+}
+<script src="~/Scripts/jquery-1.8.3.js"></script>
+<link href="~/Content/starwars.css" rel="stylesheet" />
+<script src="~/Scripts/starwars.js"></script>
+
+<div class="preview-panel">
+    <p class="const-section-name">Предпросмотр</p>
+    <div id="carusel">
+        <div class="row main-page-row preview-panel-row">
+            <div class="col-md-6" id="slider">
+                <div class="row">
+                    <div id="carousel-bounding-box">
+                        <div class="carousel slide" id="myCarousel">
+                            <!-- Carousel items -->
+                            <div class="carousel-inner">
+                                @{int count = 0; }
+                                @foreach (var q in ViewBag.Images)
+                                {
+                                    if (count == 0)
+                                    {
+                                        <div class="active item" data-slide-number="@count">
+                                            <div class="col-md-12 carousel-col">
+                                                @Html.Raw("<img class='offer-img' src=\"data:image/jpeg;base64," + q + "\" />")
+                                            </div>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="item" data-slide-number="@count">
+                                            <div class="col-md-12 carousel-col">
+                                                @Html.Raw("<img class='offer-img' src=\"data:image/jpeg;base64," + q + "\" />")
+                                            </div>
+                                        </div>
+                                    }
+                                    count++;
+                                }                               
+                            </div>
+                            <!-- Carousel nav -->
+                            <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+                                <span class="glyphicon glyphicon-chevron-left"></span>
+                            </a>
+                            <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+                                <span class="glyphicon glyphicon-chevron-right"></span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="catalog-row">
+                    <div class="catalog-row">
+                        <p class="catalog-info">
+                            @Model.ShortDescription
+                        </p>
+                    </div>
+                    <div class="catalog-row">
+                        <p class="catalog-info catalog-info-hightlighted">Услугу предоставляет: @Model.Provider</p>
+                    </div>
+                    <div class="catalog-row">
+                        <p class="catalog-info catalog-info-hightlighted">Адрес: @Model.City @Model.Adress</p>
+                    </div>
+                    <div class="catalog-row">
+                        <p class="catalog-info">Рабочие часы: @Model.WorkingHours</p>
+                    </div>
+                    <div class="catalog-row">
+                        <p class="catalog-info">Контакты: @Model.Contacts</p>
+                    </div>
+                    <div class="catalog-row">
+                        <p class="catalog-info catalog-info-hightlighted">Стоимость: @Model.Prices</p>
+                    </div>
+                    <div class="catalog-row" id="rbar1"><span class="rate_star checked" data-value="1"></span><span class="rate_star checked" data-value="2"></span><span class="rate_star checked" data-value="3"></span><span class="rate_star checked" data-value="4"></span><span class="rate_star" data-value="5"></span><input type="hidden" class="get_rate" value="4" default-stars="4"></div>
+                    <div class="catalog-row">
+                        <p class="catalog-info" id="vote_result"></p>
+                    </div>
+
+                </div>
+                <div class="catalog-row">
+
+                    <small id="hot-offer1">
+                        <span class="glyphicon glyphicon-asterisk hot-offer" aria-hidden="true"></span>
+                        <meta>@Model.hotOffer
+                    </small>
+                </div>               
+            </div>
+        </div>
+
+        <div class="row main-page-row preview-panel-row">
+            <div class="col-md-12">
+                <h3>Описание:</h3>
+                <p>
+                    @Model.Description
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="container" id="gallery">
+        <div id="main_area">
+            <div class="row hidden-xs" id="slider-thumbs">
+                <ul class="hide-bullets">
+                    @{int count2 = 0;
+                        string id = "carousel-selector-";
+                     }
+                    @foreach (var q in ViewBag.Images)
+                    {
+                        id += count2;
+                        <li class="col-sm-4">
+                            <a class="thumbnail" id=@id>@Html.Raw("<img class='offer-img image' src=\"data:image/jpeg;base64," + q + "\" />")</a>
+                        </li>                      
+                        count2++;
+                    }                 
+                </ul>
+            </div>
+
+            <div class="row main-page-row">
+                <div class="col-md-12">
+                    <div class="catalog-row">
+                        <p class="catalog-info">
+                            @Model.ShortDescription
+                        </p>
+                    </div>
+                    <div class="catalog-row">
+                        <p class="catalog-info catalog-info-hightlighted">Услугу предоставляет: @Model.Provider</p>
+                    </div>
+                    <div class="catalog-row">
+                        <p class="catalog-info catalog-info-hightlighted">Адрес: @Model.City @Model.Adress</p>
+                    </div>
+                    <div class="catalog-row">
+                        <p class="catalog-info">Рабочие часы: @Model.WorkingHours</p>
+                    </div>
+                    <div class="catalog-row">
+                        <p class="catalog-info">Контакты: @Model.Contacts</p>
+                    </div>
+                    <div class="catalog-row">
+                        <p class="catalog-info catalog-info-hightlighted">Стоимость: @Model.Prices</p>
+                    </div>
+                    <div class="catalog-row" id="rbar2"><span class="rate_star checked" data-value="1"></span><span class="rate_star checked" data-value="2"></span><span class="rate_star checked" data-value="3"></span><span class="rate_star checked" data-value="4"></span><span class="rate_star" data-value="5"></span><input type="hidden" class="get_rate" value="4" default-stars="4"></div>
+                    <div class="catalog-row">
+                        <p class="catalog-info" id="vote_result"></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="catalog-row">
+
+                <small id="hot-offer">
+                    <span class="glyphicon glyphicon-asterisk hot-offer" aria-hidden="true"></span>
+                    <meta>@Model.hotOffer
+                </small>
+            </div>
+
+            <div class="row main-page-row preview-panel-row">
+                <div class="col-md-12">
+                    <h3>Описание:</h3>
+                    <p>
+                       @Model.Description
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<input type="text" id="offer" style="visibility:hidden" value=@Model.Id />
+@*<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>*@
+
+<script src="~/Scripts/ZoomScript.js"></script>
+<script src="~/Scripts/SkinScripts.js"></script>

@@ -44,6 +44,59 @@ namespace Lifebuoy.Controllers
                 else
                     return View("AccessDenied");
         }
+        [HttpGet]
+        public ActionResult SkinSettings(int? id)
+        {
+            List<String> Images = new List<string>();
+            string[] splitResult;
+
+            var offer = db.Offers.Find(id);
+            if (offer!=null)
+            {
+                splitResult = offer.Images.Split(';');
+                Images = splitResult.ToList();
+                Images.RemoveAt(Images.Count - 1);
+                ViewBag.Images = Images;
+
+                return View(offer);
+            }
+                
+            else
+                return HttpNotFound();
+        }
+   
+         [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult SkinSettings(FormCollection fc)
+         {
+            string photo_Display_Type = fc.Get("pic");
+            string background = fc.Get("backgr");
+            string hot = fc.Get("hot");
+            string hightlight = fc.Get("hightlight");
+            int offerId = Convert.ToInt32(fc.Get("offerId"));
+            var sd = db.SkinsDetails.FirstOrDefault(d => d.OfferId == offerId);
+            if (sd == null)
+            {
+                db.SkinsDetails.Add(new SkinDetails
+                {
+                    photoDisplayMode = photo_Display_Type,
+                    background = background,
+                    hotOffer = hot,
+                    hightlight = hightlight,
+                    OfferId = offerId
+                });
+            }
+            else
+            { 
+                sd.photoDisplayMode = photo_Display_Type;
+                sd.background = background;
+                sd.hotOffer = hot;
+                sd.hightlight = hightlight;
+                sd.OfferId = offerId;
+            }
+            db.SaveChanges();
+            return RedirectToAction("Dashboard");
+         }
 
         public ActionResult Details(int? id)
         {
@@ -64,7 +117,7 @@ namespace Lifebuoy.Controllers
                 return View("AccessDenied");
         }
 
-        public ActionResult Create()
+        public ActionResult FillData()
         {
             if (User.IsInRole("Provider"))
             {
@@ -76,13 +129,14 @@ namespace Lifebuoy.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IEnumerable<HttpPostedFileBase> files, Offers offers)
+        public ActionResult FillData(IEnumerable<HttpPostedFileBase> files, Offers offers)
         {
             if (User.IsInRole("Provider"))
             {
                 if (ModelState.IsValid)
                 {
                     string images = "";
+
                     if (files != null)
                     foreach (var file in files)
                     {
